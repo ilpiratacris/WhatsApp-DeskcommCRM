@@ -69,3 +69,6 @@ ID dei servizi preesistenti. Nessuna prova di invio WhatsApp o AI.
 
 Il gate multilingue verifica il risultato di 	raduzir, indipendentemente dalla
 collocazione del catalogo (colonne originali o JSON italiano separato).
+
+Revisione live: preservati acronimi CRM/CPC/CPM, Trunk SIP e marchio Nuvemshop;
+corretti fatturazione, identità visiva e messaggio inbox vuota.
