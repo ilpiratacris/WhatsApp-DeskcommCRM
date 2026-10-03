@@ -8,8 +8,18 @@
     "quality_profile": "standard"
   },
   "lanes": [
-    { "id": "persona", "label": "Persona" },
-    { "id": "app", "label": "Applicazione" }
+    {
+      "id": "persona",
+      "label": "Persona"
+    },
+    {
+      "id": "app",
+      "label": "Applicazione"
+    },
+    {
+      "id": "qualita",
+      "label": "Qualità della traduzione"
+    }
   ],
   "mainPath": ["selector", "preference", "provider", "catalog", "screen"],
   "nodes": [
@@ -54,15 +64,67 @@
       "col": 4,
       "type": "ui",
       "label": "Login, onboarding, shell, pagine app e admin"
+    },
+    {
+      "id": "review",
+      "lane": "qualita",
+      "col": 2,
+      "type": "service",
+      "label": "Revisione di funzione e stati / elenco prima-dopo"
+    },
+    {
+      "id": "tests",
+      "lane": "qualita",
+      "col": 4,
+      "type": "service",
+      "label": "Test token, navigazione e diagnostica reale"
     }
   ],
   "edges": [
-    { "from": "selector", "to": "preference", "label": "trocarIdioma / salvataggio esistente" },
-    { "from": "preference", "to": "provider", "label": "lettura autorizzata" },
-    { "from": "provider", "to": "catalog", "label": "useT" },
-    { "from": "catalog", "to": "screen", "label": "testo italiano" },
-    { "from": "provider", "to": "dates", "label": "useLocaleDeData" },
-    { "from": "dates", "to": "screen", "label": "date locali" },
-    { "from": "screen", "to": "selector", "label": "preferenza sempre modificabile" }
+    {
+      "from": "selector",
+      "to": "preference",
+      "label": "trocarIdioma / salvataggio esistente"
+    },
+    {
+      "from": "preference",
+      "to": "provider",
+      "label": "lettura autorizzata"
+    },
+    {
+      "from": "provider",
+      "to": "catalog",
+      "label": "useT"
+    },
+    {
+      "from": "catalog",
+      "to": "screen",
+      "label": "testo italiano"
+    },
+    {
+      "from": "provider",
+      "to": "dates",
+      "label": "useLocaleDeData"
+    },
+    {
+      "from": "dates",
+      "to": "screen",
+      "label": "date locali"
+    },
+    {
+      "from": "screen",
+      "to": "selector",
+      "label": "preferenza sempre modificabile"
+    },
+    {
+      "from": "review",
+      "to": "catalog",
+      "label": "significato verificato nel codice"
+    },
+    {
+      "from": "catalog",
+      "to": "tests",
+      "label": "copertura e regressioni semantiche"
+    }
   ]
 }

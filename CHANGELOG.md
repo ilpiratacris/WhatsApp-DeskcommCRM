@@ -8,6 +8,10 @@ Se você roda o DeskcommCRM numa VPS, **leia a seção da versão para a qual es
 
 ## [Não lançado]
 
+### Corrigido
+
+- **Italiano secondo la funzione**: corretti testi fuorvianti di primo accesso, navigazione, azioni e stati. 510 voci riviste nel contesto e 214 uniformate nei termini; revisione editoriale del catalogo completo ancora aperta.
+
 ### Adicionado
 
 - **Manutenzione del fork con Graft**: comandi per generare e verificare il grafo locale e procedura per i contributori, senza modifiche al runtime CRM.

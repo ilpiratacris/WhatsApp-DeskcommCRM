@@ -5,6 +5,9 @@ Nessun redesign, nuova integrazione, numero WhatsApp o dato cliente.
 
 ## Implementazione e limiti
 
+La revisione funzionale successiva è documentata in
+[ITALIANO-REVISIONE.md](ITALIANO-REVISIONE.md), con elenco delle correzioni e limiti.
+
 - Registro `it`, etichetta Italiano, BCP-47 `it-IT`; selettore, profilo e
   organizzazione utilizzano le superfici esistenti.
 - Catalogo `lib/i18n/traducoes/it.json`: tutte le chiavi del dizionario; fallback

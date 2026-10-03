@@ -6,6 +6,7 @@ import italiano from "@/lib/i18n/traducoes/it.json";
 import { localeDeData, tagDeIdioma } from "@/lib/i18n/datas";
 import { normalizarIdioma, parseAcceptLanguage } from "@/lib/i18n/idiomas";
 import { NAV_CATALOG, NAV_GROUPS } from "@/lib/navigation/catalogo";
+import { lerDiagnosticoGoogle } from "@/lib/conversoes/historico";
 
 const catalogo: Record<string, string> = italiano;
 const tokens = (s: string) => s.match(/\{\{?[^{}\n]+\}?\}|https?:\/\/[^\s]+|`[^`]+`/g) ?? [];
@@ -48,5 +49,54 @@ describe("italiano: catálogo, parâmetros e preferência", () => {
     expect(format(new Date(2026, 9, 4), "EEEE d MMMM", { locale: localeDeData("it") })).toBe(
       "domenica 4 ottobre",
     );
+  });
+
+  it.each([false, true])(
+    "descreve o envio real quando habilitada=%s, sem confundir conexão e envio",
+    async (habilitada) => {
+      // Real diagnostic branching; database responses contain no customer data or external calls.
+      const admin = {
+        from() {
+          const query = {
+            select: () => query,
+            eq: () => query,
+            gte: () => query,
+            in: () => query,
+            order: () => query,
+            limit: () => query,
+            maybeSingle: async () => ({ data: null, error: null }),
+            then: (resolve: (value: unknown) => unknown) =>
+              Promise.resolve({ data: [], count: 0, error: null }).then(resolve),
+          };
+          return query;
+        },
+      };
+      const diagnostico = await lerDiagnosticoGoogle(admin as never, "org-sintetica", {
+        instalacaoConfigurada: true,
+        habilitada,
+        temRefreshToken: true,
+        customerId: "test",
+        temAcaoDeVenda: false,
+        etapasAbertas: 0,
+      });
+      const conexao = diagnostico.find((item) => item.chave === "conexao")!;
+      const detalhe = traduzir(conexao.detalhe, "it");
+      expect(detalhe).toContain("account è collegato");
+      expect(detalhe).toContain(habilitada ? "invio è attivo" : "invio è disattivato");
+      expect(conexao.saude).toBe(habilitada ? "ok" : "atencao");
+      if (!habilitada) expect(traduzir(conexao.titulo, "it")).toBe("Invio sospeso");
+      expect(detalhe).not.toContain("caricamento");
+    },
+  );
+
+  it("mantém as instruções executáveis de rastreio, não traduz nomes de atributos HTML", () => {
+    const chave = Object.keys(catalogo).find((s) =>
+      s.startsWith("Para não guardar a origem na aba,"),
+    )!;
+    const instrucao = traduzir(chave, "it");
+    expect(instrucao).toContain('data-storage="none"');
+    expect(instrucao).toContain("data-rastreio-ignorar");
+    expect(instrucao).toContain("escludere un link dal tracciamento");
+    expect(instrucao).not.toContain("data-track-ignor");
   });
 });

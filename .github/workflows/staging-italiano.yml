@@ -45,7 +45,7 @@ jobs:
           extension = Path('stable/components/extensions/ExtensionCatalog.tsx')
           extension.write_text(extension.read_text().replace('import { useIdioma } from "@/lib/i18n/IdiomaProvider";', 'import { useIdioma } from "@/lib/i18n/IdiomaProvider";\nimport type { Idioma } from "@/lib/i18n/idiomas";').replace('locale: "pt-BR" | "es",', 'locale: Idioma,'))
           changelog = Path('stable/CHANGELOG.md')
-          changelog.write_text(changelog.read_text().replace('## [Não lançado]', '## [Não lançado]\n\n### Adicionado\n\n- Italiano: interfaccia e date locali nello staging, da v1.70.0.'))
+          changelog.write_text(changelog.read_text().replace('## [Não lançado]', '## [Não lançado]\n\n### Corrigido\n\n- Italiano: corretti testi fuorvianti secondo la funzione dei comandi, degli stati e del primo accesso. Revisione editoriale completa del catalogo ancora da completare.\n\n### Adicionado\n\n- Italiano: interfaccia e date locali nello staging, da v1.70.0.'))
           PY
       - uses: docker/setup-buildx-action@v3
       - uses: docker/build-push-action@v6

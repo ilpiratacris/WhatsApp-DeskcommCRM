@@ -287,3 +287,14 @@ Questa fase non include un nuovo deploy o una nuova verifica live del CRM.
 Resta valida l'evidenza staging riportata sopra; i gate operativi aperti non
 sono chiusi dal push Git. I workflow del fork su main possono costruire immagini;
 lo staging usa l'immagine stabile italiana fissata nel proprio ambiente.
+
+## Revisione funzionale italiano — 4 ottobre 2026
+
+Correzione dei testi in base ai comportamenti e agli stati del codice, senza
+modifiche a schema, canali o funzioni. [Metodo e limiti](../deployment/staging/ITALIANO-REVISIONE.md),
+con elenco prima/dopo versionato: 724 voci, 510 editoriali e 214 terminologiche.
+Test aggiunti sulla diagnostica reale Google con invio attivo/disattivato e
+sugli attributi eseguibili del tracciamento. Aggiornati Novità e contratto
+architetturale; nessuna nuova funzione da inserire nel pannello amministrativo.
+
+Verifica CI e nuova pubblicazione staging: in corso, evidenze aggiunte dopo i controlli.
