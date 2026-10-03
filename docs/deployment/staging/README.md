@@ -73,6 +73,6 @@ pubblici. Webhook globale esterno deve restare 403, WAHA zero sessioni fino ad
 un numero esclusivamente di test autorizzato. Onboarding completato dopo conferma
 utente per termini/privacy: `Deskcomm Staging`, fuso `Europe/Rome`, funnel
 `Clienti — test` con sette fasi in italiano; inbox e quadro vuoti verificati.
-L'interfaccia generale resta in portoghese. SMTP, backup/restore e capacità
+L'interfaccia italiana è descritta in [ITALIANO.md](ITALIANO.md). SMTP, backup/restore e capacità
 sotto carico non verificati. Ultimo disco libero circa 16 GiB: valutare crescita
 prima di abilitare media/carichi. Nessun agente di aggiornamento automatico.

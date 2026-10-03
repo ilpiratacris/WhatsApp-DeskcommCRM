@@ -145,15 +145,10 @@ Configurare SMTP, collaudare backup/restore e valutare disco/capacità prima di
 uso operativo. Gestione nativa Coolify ancora da implementare, senza sostituire
 implicitamente questo stack.
 
-Richiesta successiva dell'utente: italiano per comprendere l'interfaccia.
-Il registro lingue locale offre portoghese/spagnolo, non italiano; nessuna lingua
-italiana attivabile semplicemente tramite APP_LOCALE. Traduzione integrata da
-valutare separatamente dal baseline immutato; la schermata iniziale è stata
-spiegata in italiano all'utente. Nome funnel e fasi configurati in italiano;
-l'interfaccia generale resta in portoghese.
-
-Nessuna modifica codice prodotto: grafi, Novità e Gestione funzioni non hanno
-modifiche funzionali da riportare. Documentazione aggiornata nel commit deploy.
+Richiesta successiva dell'utente: tradurre e pubblicare l'interfaccia italiana.
+Il baseline iniziale portoghese è stato mantenuto come riferimento; la successiva
+pubblicazione dell'italiano è descritta nella verifica dedicata in fondo al report.
+Catalogo, grafo, Novità e impostazioni lingua aggiornati senza nuove feature di CRM.
 
 ## Provenienza
 
@@ -189,3 +184,78 @@ nel quadro salvato, zero lead. WhatsApp, AI, test AI e inviti saltati senza
 connessioni, chiavi o invii. Verifica finale health alle 21:44 UTC: healthy;
 11 servizi Supabase healthy, sei CRM running (quattro con healthcheck healthy),
 27/27 container preesistenti con stessi ID running e zero riavviati.
+
+## Pubblicazione interfaccia italiana — 4 ottobre 2026
+
+Richiesta autorizzata dall'utente: traduzione integrata e pubblicazione sullo
+staging esistente. Nessun redesign, refactoring di business o nuovo collegamento.
+
+### Fonte e versione distribuita
+
+- Base stabile upstream v1.70.0, commit
+  `cbf403e201627b49c0a9899f5a0cb5f12e02d975`; non `latest`.
+- Patch di presentazione del fork, commit
+  `c64b8597d41f6fd18000e7b35056ec0dc3b0967c`.
+- [CI completata con successo](https://github.com/ilpiratacris/WhatsApp-DeskcommCRM/actions/runs/37159364562):
+  typecheck, lint (zero errori, 489 warning preesistenti), 50 test in sette file,
+  build Docker della fonte stabile con catalogo italiano.
+- Immagine `deskcomm-staging-it:c64b8597d41f6fd18000e7b35056ec0dc3b0967c`;
+  ID `sha256:555e659c10b7823787c97a860b586efc75b359832f017b834d502c1cee3ae8ad`.
+- Versione health: `1.70.0-it.c64b8597d41f6fd18000e7b35056ec0dc3b0967c`.
+- Pubblicazione via SSH/Docker Compose sotto il Traefik di Coolify già esistente,
+  sostituito soltanto `app` con gli stessi quattro file e `--no-deps --no-build`.
+  Worker e scheduler mantengono l'immagine stabile originale. Nessuna migrazione.
+
+### Verifiche effettuate
+
+Health autenticato del 3 ottobre alle 22:53:51 UTC (4 ottobre 00:53 in Italia):
+HTTP 200, `healthy`; Supabase, Redis e WAHA `ok`. Healthcheck container app healthy.
+TLS verificato con validazione del certificato, senza bypass.
+
+Browser reale: selettore italiano disponibile, preferenza salvata e confermata dopo
+reload, navigazione Messaggi, Contatti, Impostazioni, Profilo, Connessioni ed elenco
+funnel; quadro `Clienti — test` con sette fasi vuote. Nella versione finale verificati
+nuovamente il quadro, `Lingua: Italiano`, titolo CRM e le impostazioni con
+Fatturazione, Identità visiva e Trunk SIP. Organizzazione `Deskcomm Staging`
+aggiornata a locale `it` (una riga); nessun dato cliente modificato.
+Pagina login pubblica HTTP 200 e testo `Accedi` con `Accept-Language: it-IT`.
+Sessione autenticata esistente utilizzabile: non ripetuto un nuovo login da smartphone.
+Onboarding già completato nel baseline, non azzerato o reinviato.
+
+Snapshot prima/dopo: **43/43 container diversi dall'app**, stessi ID e stessi
+`StartedAt`, nessun riavvio. Include i 27 servizi preesistenti e gli altri servizi
+staging. Gli 11 servizi Supabase dedicati sono healthy. Webhook globale esterno
+403 dopo la prima pubblicazione. Nessun numero collegato nella schermata Connessioni;
+nessun invio WhatsApp, invito, credenziale AI o dato sensibile aggiunto.
+Disco dopo caricamento: circa 18 GiB liberi, 83% utilizzato; nessuna prova sotto carico.
+
+![Quadro staging italiano verificato](../deployment/staging/italiano-verifica.jpg)
+
+### Copertura, limiti e ripristino
+
+Catalogo di 8.889 testi, traduzione assistita offline e revisione manuale delle
+etichette e descrizioni principali. Test di copertura menu, segnaposto, link,
+normalizzazione lingua e date. Non è una revisione editoriale completa delle 8.889
+frasi: testi secondari possono richiedere miglioramenti. Titoli della scheda browser
+rimangono in parte portoghesi (metadata upstream); contenuti utente, documenti legali,
+email e manifest di estensioni esterne non diventano automaticamente italiani.
+Nessuna verifica sull'effettivo telefono dell'utente.
+
+Documentazione di implementazione/rollback: [ITALIANO.md](../deployment/staging/ITALIANO.md).
+Backup privato env originale: `/opt/deskcomm-staging/.runtime/env-before-italiano-20261004`.
+Ripristinarlo e riavviare soltanto app con gli stessi quattro Compose per tornare
+all'immagine stabile originale. Catalogo e locale `it` sono preferenze reversibili;
+con la release originale un locale sconosciuto ricade sul portoghese.
+Grafo aggiornato in `docs/architecture/italiano.architecture.json`; Novità nel
+Changelog non rilasciato e fragment `.changes/italiano-staging.md`.
+Gestione funzioni: nessun nuovo interruttore, lingua nelle impostazioni esistenti.
+
+Fermata alla pubblicazione italiana verificata. Restano aperti SMTP,
+backup/restore collaudato, capacità sotto carico e gestione nativa dello stack
+nell'interfaccia Coolify, come nel baseline. La password provvisoria va cambiata
+dall'utente attraverso il profilo; nessuna credenziale riportata in questo report.
+
+Provenienza di questo aggiornamento: file locali del fork e release stabile;
+prove live SSH, Docker, TLS e browser; GitHub Actions per build/test. Wiki
+`wiki/concepts/coolify-supabase-db-access.md` usata come contesto operativo,
+non come prova del deployment corrente.

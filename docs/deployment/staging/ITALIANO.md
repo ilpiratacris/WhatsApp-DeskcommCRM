@@ -67,7 +67,7 @@ I cambiamenti al catalogo, al filtro o al test italiano attivano gli stessi gate
 Dopo: health, TLS, lingua persistente, menu e pagine principali; confronto degli
 ID dei servizi preesistenti. Nessuna prova di invio WhatsApp o AI.
 
-Il gate multilingue verifica il risultato di 	raduzir, indipendentemente dalla
+Il gate multilingue verifica il risultato di `traduzir`, indipendentemente dalla
 collocazione del catalogo (colonne originali o JSON italiano separato).
 
 Revisione live: preservati acronimi CRM/CPC/CPM, Trunk SIP e marchio Nuvemshop;
