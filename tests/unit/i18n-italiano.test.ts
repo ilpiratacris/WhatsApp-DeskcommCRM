@@ -25,7 +25,7 @@ describe("italiano: catálogo, parâmetros e preferência", () => {
   });
 
   it("resolve os textos reais da navegação e seus hubs", () => {
-    const textos = NAV_CATALOG.flatMap((item) => [item.label, item.description, item.section])
+    const textos = NAV_CATALOG.flatMap((item) => [item.label, item.description, "section" in item ? item.section : undefined])
       .concat(NAV_GROUPS.flatMap((grupo) => [grupo.label, grupo.hub?.label]))
       .filter((texto): texto is string => Boolean(texto));
     expect(textos.filter((texto) => !catalogo[texto])).toEqual([]);

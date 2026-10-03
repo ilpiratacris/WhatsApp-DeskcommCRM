@@ -40,6 +40,8 @@ jobs:
           s = s.replace('import type { Idioma } from "./idiomas";', 'import type { Idioma } from "./idiomas";\nimport italiano from "./traducoes/it.json";')
           s = s.replace('export function traduzir(texto: string, idioma: Idioma): string {', 'export function traduzir(texto: string, idioma: Idioma): string {\n  if (idioma === "it") return (italiano as Record<string, string>)[texto] ?? texto;')
           p.write_text(s)
+          extension = Path('stable/components/extensions/ExtensionCatalog.tsx')
+          extension.write_text(extension.read_text().replace('import { useIdioma } from "@/lib/i18n/IdiomaProvider";', 'import { useIdioma } from "@/lib/i18n/IdiomaProvider";\nimport type { Idioma } from "@/lib/i18n/idiomas";').replace('locale: "pt-BR" | "es",', 'locale: Idioma,'))
           changelog = Path('stable/CHANGELOG.md')
           changelog.write_text(changelog.read_text().replace('## [Não lançado]', '## [Não lançado]\n\n### Adicionado\n\n- Italiano: interfaccia e date locali nello staging, da v1.70.0.'))
           PY

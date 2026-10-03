@@ -18,6 +18,9 @@ Nessun redesign, nuova integrazione, numero WhatsApp o dato cliente.
 
 ## Build e deploy
 
+Il filtro delle estensioni accetta il tipo `Idioma` dal registro; i contenuti
+dei pacchetti esterni mantengono il fallback del manifest originale.
+
 Workflow `.github/workflows/staging-italiano.yml`: estrae il commit upstream
 `cbf403e201627b49c0a9899f5a0cb5f12e02d975` (v1.70.0), copia soltanto registro,
 date e catalogo, aggiunge il ramo italiano nel traduttore. Non distribuisce
