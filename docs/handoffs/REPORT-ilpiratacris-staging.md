@@ -292,7 +292,7 @@ lo staging usa l'immagine stabile italiana fissata nel proprio ambiente.
 
 Correzione dei testi in base ai comportamenti e agli stati del codice, senza
 modifiche a schema, canali o funzioni. [Metodo e limiti](../deployment/staging/ITALIANO-REVISIONE.md),
-con elenco prima/dopo versionato: 724 voci, 510 editoriali e 214 terminologiche.
+con elenco prima/dopo versionato: 735 voci, 521 editoriali e 214 terminologiche.
 Test aggiunti sulla diagnostica reale Google con invio attivo/disattivato e
 sugli attributi eseguibili del tracciamento. Aggiornati Novità e contratto
 architetturale; nessuna nuova funzione da inserire nel pannello amministrativo.

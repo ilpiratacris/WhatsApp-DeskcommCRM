@@ -99,4 +99,16 @@ describe("italiano: catálogo, parâmetros e preferência", () => {
     expect(instrucao).toContain("escludere un link dal tracciamento");
     expect(instrucao).not.toContain("data-track-ignor");
   });
+
+  it("explica o CSV mantendo os cabeçalhos reconhecidos pelo importador", () => {
+    const chave = Object.keys(catalogo).find((s) =>
+      s.startsWith("Envie um arquivo .csv com cabeçalho"),
+    )!;
+    const instrucao = traduzir(chave, "it");
+    expect(instrucao).toContain("nome, telefone, email, cpf, nascimento, tags");
+    expect(instrucao).toContain("500 righe per file");
+    expect(traduzir("Importar", "it")).toBe("Importa");
+    expect(traduzir("Nome da etapa", "it")).toBe("Nome della fase");
+    expect(traduzir("Novo lead", "it")).toBe("Nuovo lead");
+  });
 });

@@ -28,7 +28,7 @@ Confronto con le chiavi portoghesi e con il codice che utilizza i testi:
 - Prove degli agenti: interrompere l’attesa non interrompe necessariamente il
   lavoro già inviato al provider; la simulazione non invia messaggi ai contatti.
 
-Sono state modificate **724 voci**, di cui **510 con riscrittura editoriale** e
+Sono state modificate **735 voci**, di cui **521 con riscrittura editoriale** e
 **214 con sola uniformazione terminologica o del verbo di comando**. La seconda
 categoria non certifica il resto della frase. L’elenco prima/dopo con tipo di
 revisione è in `italiano-revisione.json`.

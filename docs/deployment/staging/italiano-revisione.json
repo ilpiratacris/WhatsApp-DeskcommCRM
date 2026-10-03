@@ -3618,5 +3618,60 @@
     "before": "Un vantaggio ha un proprietario: informa il proprietario_user_id O proprietario_agent_id.",
     "after": "Un lead deve avere un responsabile: specifica owner_user_id oppure owner_agent_id.",
     "review": "editorial"
+  },
+  "Importar contatos de planilha": {
+    "before": "Importa contatti foglio di calcolo",
+    "after": "Importa contatti da un file CSV",
+    "review": "editorial"
+  },
+  "Importar": {
+    "before": "Importazioni",
+    "after": "Importa",
+    "review": "editorial"
+  },
+  "Importando…": {
+    "before": "Mi dispiace.",
+    "after": "Importazione in corso…",
+    "review": "editorial"
+  },
+  "contato(s) importado(s)": {
+    "before": "contatti importati(i)",
+    "after": "contatti importati",
+    "review": "editorial"
+  },
+  "linha(s) com problema": {
+    "before": "linea di problemi(i)",
+    "after": "righe con problemi",
+    "review": "editorial"
+  },
+  "linha(s) lidas": {
+    "before": "linea di lettura(i)",
+    "after": "righe lette",
+    "review": "editorial"
+  },
+  "já existente(s)": {
+    "before": "esistenti(i)",
+    "after": "già presenti",
+    "review": "editorial"
+  },
+  "com erro": {
+    "before": "errore",
+    "after": "con errori",
+    "review": "editorial"
+  },
+  "Linha": {
+    "before": "Linea",
+    "after": "Riga",
+    "review": "editorial"
+  },
+  "Importar outro arquivo": {
+    "before": "Importare un altro file",
+    "after": "Importa un altro file",
+    "review": "editorial"
+  },
+  "Envie um arquivo .csv com cabeçalho — colunas reconhecidas: nome, telefone, email, cpf, nascimento, tags. Excel: use “Salvar como” → “CSV UTF-8”. Máximo de 500 linhas por arquivo.": {
+    "before": "Inviare un file .csv con intestazione — colonne riconosciute: nome, telefono, e-mail, cpf, nascita, tag. Excel: utilizzare “Salva come” → “CSV UTF-8”. Massima 500 linee per file.",
+    "after": "Carica un file .csv con la riga di intestazione. Usa questi nomi di colonna: nome, telefone, email, cpf, nascimento, tags. In Excel scegli “Salva con nome” → “CSV UTF-8”. Massimo 500 righe per file.",
+    "review": "editorial"
   }
 }
