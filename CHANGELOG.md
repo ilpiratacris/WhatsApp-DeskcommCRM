@@ -8,6 +8,10 @@ Se você roda o DeskcommCRM numa VPS, **leia a seção da versão para a qual es
 
 ## [Não lançado]
 
+### Adicionado
+
+- **Italiano no fork staging**: interface, seletor persistente e datas em italiano. Publicação baseada em v1.70.0; sem alteração de schema ou canais. Tradução inicial assistida, com revisão das telas principais e cobertura mecânica do catálogo.
+
 ## [1.70.0] — 2026-10-03
 
 Esta versão junta 106 mudanças. Cada item é curto para caber na tela de atualização; a explicação completa está no PR citado. Nenhuma exige ação na atualização.

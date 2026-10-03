@@ -32,6 +32,7 @@
  * do que estava.
  */
 import type { Idioma } from "./idiomas";
+import italiano from "./traducoes/it.json";
 
 /** `pt-BR` não aparece: é a chave. Só o que DIFERE precisa de linha. */
 type Traducoes = Record<string, Partial<Record<Exclude<Idioma, "pt-BR">, string>>>;
@@ -14068,6 +14069,7 @@ export const DICIONARIO: Traducoes = {
  * tradução parcial não pode deixar a tela PIOR do que estava.
  */
 export function traduzir(texto: string, idioma: Idioma): string {
+  if (idioma === "it") return (italiano as Record<string, string>)[texto] ?? texto;
   if (idioma === "pt-BR") return texto;
   return DICIONARIO[texto]?.[idioma] ?? texto;
 }

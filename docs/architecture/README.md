@@ -14,6 +14,8 @@ ser fonte sem ninguém decidir isso.
 
 ## Mapas
 
+`italiano.architecture.json`: preferência existente → provider → catálogo italiano / datas → interface, com retorno ao seletor. Fonte JSON, sem novo render HTML.
+
 | arquivo | escopo |
 |---|---|
 | `conversoes-de-anuncios.architecture.json` | venda, entrega, protocolo assíncrono, pendências e reprocessamento |

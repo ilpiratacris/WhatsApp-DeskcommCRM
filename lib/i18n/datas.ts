@@ -1,4 +1,4 @@
-import { es, ptBR } from "date-fns/locale";
+import { es, it, ptBR } from "date-fns/locale";
 import type { Locale } from "date-fns";
 
 import { IDIOMA_PADRAO, type Idioma } from "./idiomas";
@@ -33,6 +33,7 @@ import { idiomaVisivelPorCodigo } from "./registro";
  * "Thursday" é o pior dos três mundos.
  */
 const LOCALE_DE_DATA: Record<Idioma, Locale> = {
+  it,
   "pt-BR": ptBR,
   es,
 };

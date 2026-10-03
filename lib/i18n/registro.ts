@@ -63,6 +63,15 @@ export const REGISTRO_DE_IDIOMAS = [
     mantenedor: "mantenedores do projeto",
   },
   {
+    codigo: "it",
+    nomeNativo: "Italiano",
+    rotuloCurto: "IT",
+    tagBcp47: "it-IT",
+    subtagsDoNavegador: ["it"],
+    nivel: "completo",
+    mantenedor: "ilpiratacris",
+  },
+  {
     codigo: "es",
     nomeNativo: "Español",
     rotuloCurto: "ES",
