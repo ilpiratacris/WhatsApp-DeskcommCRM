@@ -275,6 +275,14 @@ Il lavoro staging/italiano e questa configurazione sono destinati a `main`
 con push ordinario, senza riscrivere la storia. Verificare lo SHA pubblicato
 con `git ls-remote origin refs/heads/main`.
 
+Push effettuato e SHA remoto confrontato con HEAD:
+`19f8aca8b8520e499cdf09eef7af85b90d6d7bc7`, coincidenti; albero pulito e
+`HEAD...origin/main` = `0 0`. Controlli GitHub avviati, non ancora completati
+al momento della verifica. Il workflow `release` (run 37160504414) fallisce
+in `actions/create-github-app-token@v3`: identificativo App vuoto
+(`RELEASE_APP_ID` non disponibile nel contesto). Non è stata tagliata una
+nuova release; configurare l'App del fork richiede una fase dedicata.
+
 Questa fase non include un nuovo deploy o una nuova verifica live del CRM.
 Resta valida l'evidenza staging riportata sopra; i gate operativi aperti non
 sono chiusi dal push Git. I workflow del fork su main possono costruire immagini;
