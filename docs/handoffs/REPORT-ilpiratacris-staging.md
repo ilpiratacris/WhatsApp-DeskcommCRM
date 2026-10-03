@@ -4,12 +4,13 @@ Data: 2026-10-03. Branch: `test/initial-evaluation`.
 
 ## Risultato
 
-Baseline infrastrutturale avviato; HTTPS, health completo e login verificati.
+Baseline avviato; HTTPS, health completo, login e onboarding verificati.
 URL: <https://deskcomm-staging.cristianocosta.it/login>.
-Il login browser con gli accessi provvisori richiesti dall'utente raggiunge
-`/onboarding/welcome`. Onboarding **non completato**: la prima schermata richiede
-l'accettazione dei Termini di Uso e della Privacy, non accettati per conto
- dell'utente. Nessun numero WhatsApp collegato, dato cliente o provider AI.
+Il login browser con gli accessi provvisori richiesti dall'utente e la prima
+configurazione raggiungono `/app/inbox`. Onboarding **completato** dopo conferma
+esplicita dell'utente per termini/privacy. Organizzazione `Deskcomm Staging`,
+descrizione sintetica, fuso `Europe/Rome`, funnel `Clienti — test` con sette fasi
+in italiano. Nessun numero WhatsApp collegato, dato cliente o provider AI.
 
 Deployment tramite Docker Compose via SSH sul server Coolify, usando il Traefik
 esistente. **Non registrato come risorsa applicativa nel pannello Coolify**:
@@ -106,9 +107,10 @@ non una prenotazione o un limite CPU aggregato. Nessun OOM staging osservato.
 | HTTPS login | 200, certificato validato senza bypass |
 | GoTrue health con anon key | 200 |
 | Login API Auth | 200, autenticato, email confermata |
-| Login browser password provvisoria | successo, `/onboarding/welcome` |
-| Onboarding iniziale | visualizzato: DB installato, funnel Pedidos creato, AI mancante, WhatsApp da collegare |
-| Onboarding completo / navigazione CRM | non verificati: termini non accettati, nessun modulo inviato |
+| Login browser password provvisoria | successo; completata configurazione iniziale |
+| Onboarding completo | successo, termini/privacy accettati dopo conferma; WhatsApp, AI, test AI e inviti saltati |
+| Persistenza organizzazione | SQL: `Deskcomm Staging`, `Europe/Rome`, `onboarded_at` valorizzato, accettazione registrata |
+| Navigazione CRM | inbox vuota e funnel `Clienti — test` aperti nel browser; sette fasi salvate visibili |
 | `/api/v1/health` autenticato | 200 healthy, versione 1.70.0, Supabase/Redis/WAHA ok anche dopo applicazione limiti |
 | Webhook globale `/api/v1/webhooks/waha` esterno | 403 |
 | WAHA sessioni interne | 200, zero sessioni |
@@ -137,8 +139,8 @@ outbound, AI, RAG, automazioni, MCP, inviti, backup/restore o capacità sotto ca
 
 ## Arresto e prossimo passo
 
-Fermati al baseline infrastrutturale funzionante. Utente può cambiare password
-provvisoria e decidere l'accettazione termini, poi onboarding con dati sintetici.
+Fermati al baseline funzionante con prima configurazione completata. Utente può
+cambiare password provvisoria e accedere direttamente al CRM.
 Configurare SMTP, collaudare backup/restore e valutare disco/capacità prima di
 uso operativo. Gestione nativa Coolify ancora da implementare, senza sostituire
 implicitamente questo stack.
@@ -147,7 +149,8 @@ Richiesta successiva dell'utente: italiano per comprendere l'interfaccia.
 Il registro lingue locale offre portoghese/spagnolo, non italiano; nessuna lingua
 italiana attivabile semplicemente tramite APP_LOCALE. Traduzione integrata da
 valutare separatamente dal baseline immutato; la schermata iniziale è stata
-spiegata in italiano all'utente.
+spiegata in italiano all'utente. Nome funnel e fasi configurati in italiano;
+l'interfaccia generale resta in portoghese.
 
 Nessuna modifica codice prodotto: grafi, Novità e Gestione funzioni non hanno
 modifiche funzionali da riportare. Documentazione aggiornata nel commit deploy.
@@ -162,3 +165,27 @@ Wiki come contesto, non prova corrente:
 `wiki/concepts/coolify-supabase-db-access.md`,
 `wiki/analyses/workpress-proxy-coolify-deploy-procedure.md`,
 `wiki/analyses/fondazione-fundraise-cf-template-deploy-2026-05-10.md`.
+
+## Verifica successiva del selettore geografico
+
+Utente segnala errore all'apertura di “Onde você atende”, con ID
+`88a72c69c435430993f8eab9f851b320`. ID non trovato nei log app recenti;
+nessuna eccezione server corrispondente rilevata nella finestra controllata.
+Il componente di errore client genera ID Sentry anche quando l'invio non è
+configurato: l'ID da solo non fornisce lo stack del telefono.
+
+Prova browser reale, pagina originale portoghese: apertura menu e selezione
+Roma riuscite sia con viewport normale sia 390×844. Viewport ripristinato dopo
+la prova. Non è una verifica su Safari/Chrome del telefono dell'utente e non
+riproduce un'eventuale traduzione automatica della pagina. Causa ancora aperta;
+non dichiarata corretta e nessuna patch applicata senza riproduzione.
+
+Dopo conferma esplicita dell'utente, modulo inviato: nome `Deskcomm Staging`,
+descrizione `Ambiente di valutazione CRM con dati sintetici, senza clienti reali.`,
+fuso `Europe/Rome` (Roma). Onboarding completato, confermato sia nell'inbox sia
+nel DB. Funnel predefinito `Clienti — test`, fasi: Nuovo contatto, Risposto,
+Analisi esigenze, Proposta inviata, Trattativa, Concluso, Perso; tutte visibili
+nel quadro salvato, zero lead. WhatsApp, AI, test AI e inviti saltati senza
+connessioni, chiavi o invii. Verifica finale health alle 21:44 UTC: healthy;
+11 servizi Supabase healthy, sei CRM running (quattro con healthcheck healthy),
+27/27 container preesistenti con stessi ID running e zero riavviati.
