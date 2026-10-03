@@ -478,13 +478,13 @@ describe("a chave é o texto em português, e o português não muda", () => {
     expect(mudaram).toEqual([]);
   });
 
-  it("todo idioma servido, exceto o padrão, tem coluna no dicionário", () => {
+  it("todo idioma servido, exceto o padrão, traduz textos do catálogo", () => {
     // Guarda contra o defeito que originou esta feature: o seletor oferecia
     // `en-US` e nenhuma tradução existia — escolher não mudava uma letra.
     const outros = IDIOMAS.filter((i) => i !== "pt-BR");
     for (const idioma of outros) {
-      const comEsse = Object.values(DICIONARIO).filter((v) =>
-        Object.prototype.hasOwnProperty.call(v, idioma),
+      const comEsse = Object.keys(DICIONARIO).filter((chave) =>
+        traduzir(chave, idioma) !== chave,
       );
       expect(
         comEsse.length,

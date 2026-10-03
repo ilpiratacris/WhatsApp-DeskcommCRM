@@ -66,3 +66,6 @@ Prima della pubblicazione: typecheck, lint, test i18n e build della fonte stabil
 I cambiamenti al catalogo, al filtro o al test italiano attivano gli stessi gate CI.
 Dopo: health, TLS, lingua persistente, menu e pagine principali; confronto degli
 ID dei servizi preesistenti. Nessuna prova di invio WhatsApp o AI.
+
+Il gate multilingue verifica il risultato di 	raduzir, indipendentemente dalla
+collocazione del catalogo (colonne originali o JSON italiano separato).
