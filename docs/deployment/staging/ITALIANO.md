@@ -63,5 +63,6 @@ e Changelog non rilasciato; nessun tag upstream inventato.
 
 Risultati reali e commit distribuito in `docs/handoffs/REPORT-ilpiratacris-staging.md`.
 Prima della pubblicazione: typecheck, lint, test i18n e build della fonte stabile.
+I cambiamenti al catalogo, al filtro o al test italiano attivano gli stessi gate CI.
 Dopo: health, TLS, lingua persistente, menu e pagine principali; confronto degli
 ID dei servizi preesistenti. Nessuna prova di invio WhatsApp o AI.

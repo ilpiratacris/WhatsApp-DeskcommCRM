@@ -4,6 +4,8 @@ on:
     branches: [test/initial-evaluation]
     paths:
       - lib/i18n/**
+      - tests/unit/i18n-italiano.test.ts
+      - components/extensions/ExtensionCatalog.tsx
       - .github/workflows/staging-italiano.yml
   workflow_dispatch:
 permissions:
