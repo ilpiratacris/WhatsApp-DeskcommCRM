@@ -768,3 +768,11 @@ Antes de declarar uma task pronta:
     extensão não autoriza remover nem desligar o que já foi distribuído.
 
 Um staff engineer aprovaria? Se não, itera.
+
+## Graft — manutenzione del fork
+
+Prima di analizzare dipendenze o impatto usare `pnpm graft:build` e
+`pnpm graft:check`; ripeterli prima dei commit che modificano codice.
+Seguire [docs/runbooks/graft.md](docs/runbooks/graft.md). Il grafo `graft/` è locale;
+i contratti in `docs/architecture/` restano versionati. Graft non aggiorna
+dipendenze, non integra upstream e non esegue deployment.

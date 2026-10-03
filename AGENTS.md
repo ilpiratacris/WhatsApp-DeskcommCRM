@@ -582,3 +582,12 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Graft — manutenzione del fork
+
+Per questo fork usare Graft prima di analizzare dipendenze o impatto delle modifiche:
+`pnpm graft:build`, poi `pnpm graft:check`. Rigenerare e verificare prima di ogni
+commit che modifica codice. Il grafo generato in `graft/` è locale e ignorato da Git;
+i contratti architetturali in `docs/architecture/` restano versionati.
+Installazione e limiti: [docs/runbooks/graft.md](docs/runbooks/graft.md).
+Graft non aggiorna dipendenze, non integra upstream e non esegue deployment.

@@ -10,6 +10,8 @@ Se você roda o DeskcommCRM numa VPS, **leia a seção da versão para a qual es
 
 ### Adicionado
 
+- **Manutenzione del fork con Graft**: comandi per generare e verificare il grafo locale e procedura per i contributori, senza modifiche al runtime CRM.
+
 - **Italiano no fork staging**: interface, seletor persistente e datas em italiano. Publicação baseada em v1.70.0; sem alteração de schema ou canais. Tradução inicial assistida, com revisão das telas principais e cobertura mecânica do catálogo.
 
 ## [1.70.0] — 2026-10-03

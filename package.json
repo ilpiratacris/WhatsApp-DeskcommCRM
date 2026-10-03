@@ -7,6 +7,8 @@
     "node": ">=22"
   },
   "scripts": {
+    "graft:build": "graft build",
+    "graft:check": "graft check",
     "dev": "next dev",
     "dev:webpack": "next dev",
     "build": "next build",

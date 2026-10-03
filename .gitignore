@@ -185,3 +185,6 @@ __pycache__/
 
 # Runtime do instalador single-server: Supabase self-hosted, credenciais e dados.
 .runtime/
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/

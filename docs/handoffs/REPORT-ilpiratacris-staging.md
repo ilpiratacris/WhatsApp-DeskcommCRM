@@ -259,3 +259,23 @@ Provenienza di questo aggiornamento: file locali del fork e release stabile;
 prove live SSH, Docker, TLS e browser; GitHub Actions per build/test. Wiki
 `wiki/concepts/coolify-supabase-db-access.md` usata come contesto operativo,
 non come prova del deployment corrente.
+## Manutenzione Graft e integrazione main — 4 ottobre 2026
+
+Su richiesta dell'utente, il fork usa Graft 0.21.1 per mantenere aggiornato il
+grafo di dipendenze. Aggiunti `pnpm graft:build`, `pnpm graft:check`, istruzioni
+in AGENTS/CLAUDE e [runbook](../runbooks/graft.md). Il grafo locale è ignorato
+da Git e non sostituisce i contratti architetturali versionati.
+
+Build locale verificato: 5.116 file analizzati, 26.054 nodi, 71.488 archi.
+`pnpm graft:check` superato: wiring graph in sync. Tier semantico non costruito,
+coerentemente con l'uso senza `--deep`. `git diff --check` superato.
+Parsing senza passaggio LLM `--deep`, senza modifiche globali degli assistenti.
+Nessuna funzione amministrativa da aggiungere: lo strumento serve allo sviluppo.
+Il lavoro staging/italiano e questa configurazione sono destinati a `main`
+con push ordinario, senza riscrivere la storia. Verificare lo SHA pubblicato
+con `git ls-remote origin refs/heads/main`.
+
+Questa fase non include un nuovo deploy o una nuova verifica live del CRM.
+Resta valida l'evidenza staging riportata sopra; i gate operativi aperti non
+sono chiusi dal push Git. I workflow del fork su main possono costruire immagini;
+lo staging usa l'immagine stabile italiana fissata nel proprio ambiente.
