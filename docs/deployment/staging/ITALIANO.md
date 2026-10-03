@@ -73,3 +73,4 @@ collocazione del catalogo (colonne originali o JSON italiano separato).
 Revisione live: preservati acronimi CRM/CPC/CPM, Trunk SIP e marchio Nuvemshop;
 corretti fatturazione, identità visiva e messaggio inbox vuota.
 Riviste anche descrizioni delle impostazioni, contatti e profilo osservate nel browser.
+Verificati e chiariti anche i comandi di archiviazione, spostamento e importazione del funnel.
