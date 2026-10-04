@@ -90,3 +90,12 @@ fuso del profilo America/SaoPaulo sono rimasti invariati; organizzazione con
 lingua italiana e fuso Europe/Rome. Nessuna modifica ulteriore del baseline.
 
 Report conservato esclusivamente nel repository, secondo la scelta dell'utente.
+
+## Seguito — preparazione WhatsApp del 4 ottobre 2026
+
+Profilo ora salvato e riletto in Italiano/Europe/Rome. Pubblicata la revisione
+stabile c7a2341af, con QR rigenerato senza scansione, accesso IA in modalità test
+con elenco vuoto e protezioni di invio verificate. Nessun messaggio reale.
+Prove, copie di backup e limiti aggiornati in [WHATSAPP-READINESS.md](WHATSAPP-READINESS.md).
+Questo seguito non sostituisce i limiti del controllo precedente né certifica
+onboarding da zero, tutte le traduzioni o gli errori intermittenti non riprodotti.

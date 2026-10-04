@@ -11,7 +11,8 @@
 ## Convenções
 
 Verifica italiana staging del 4 ottobre 2026: generazione QR reale senza
-scansione, modalità test IA e nessun numero reale. Prove e limiti del primo
+scansione, modalità test IA, protezioni e Sicurezza controllate nel browser,
+profilo Italiano/Europe/Rome persistente e nessun numero reale. Prove e limiti del primo
 collegamento in `../deployment/staging/WHATSAPP-READINESS.md`; non equivale
 a un PASS di ricezione/invio WhatsApp, che richiede il telefono del titolare.
 

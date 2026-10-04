@@ -69,10 +69,16 @@ Supabase nella propria directory con il proprio env. Non usare `down -v`, cleanu
 globale Docker, stop globale o riavvio del proxy. Non toccare reti/volumi altrui.
 
 Health autenticato richiede secret privato server; non inserirlo in report/log
-pubblici. Webhook globale esterno deve restare 403, WAHA zero sessioni fino ad
-un numero esclusivamente di test autorizzato. Onboarding completato dopo conferma
+pubblici. Webhook globale esterno deve restare 403. Una sessione WAHA di prova
+è stata creata per verificare il QR, senza associarla a un numero reale.
+Il titolare ha autorizzato il proprio successivo collegamento controllato:
+seguire [WHATSAPP-READINESS.md](WHATSAPP-READINESS.md), cambiare la password
+provvisoria e attivare la verifica in due passaggi prima della scansione.
+Onboarding completato dopo conferma
 utente per termini/privacy: `Deskcomm Staging`, fuso `Europe/Rome`, funnel
 `Clienti — test` con sette fasi in italiano; inbox e quadro vuoti verificati.
-L'interfaccia italiana è descritta in [ITALIANO.md](ITALIANO.md). SMTP, backup/restore e capacità
-sotto carico non verificati. Ultimo disco libero circa 16 GiB: valutare crescita
+L'interfaccia italiana è descritta in [ITALIANO.md](ITALIANO.md). Backup giornalieri,
+ripristino completo isolato del database e copia cifrata iniziale fuori server
+verificati nel report WhatsApp. Replica periodica fuori server, SMTP e capacità
+sotto carico restano da configurare/verificare. Ultimo disco libero circa 16 GiB: valutare crescita
 prima di abilitare media/carichi. Nessun agente di aggiornamento automatico.

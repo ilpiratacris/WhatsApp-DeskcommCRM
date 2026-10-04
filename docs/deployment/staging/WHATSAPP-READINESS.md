@@ -20,7 +20,9 @@ certifica la traduzione integrale né le integrazioni esterne non configurate.
 - `.env` permessi 600, `.runtime` 700. Sessioni WAHA e media in volumi dedicati;
   database e Storage in cartelle persistenti del solo staging.
 - Tabelle public senza RLS: zero. Bucket whatsapp-media e internal-media privati.
-- QR generato dal browser senza scansione; una sessione in attesa di connessione.
+- QR generato e rigenerato dal browser senza scansione; una sessione non associata.
+  Stato SCAN_QR_CODE confermato nell’API WAHA e nel database, identità associata
+  assente. Il QR scade: per collegarsi usare Ricollega e quello appena generato.
 - Nessun secondo fattore verificato: cambio password provvisoria e attivazione
   MFA restano azioni del titolare prima dell’uso con dati personali.
 - Backup database, sessioni e Storage riusciti; wrapper verificato e cron attivo
@@ -40,7 +42,71 @@ certifica la traduzione integrale né le integrazioni esterne non configurate.
   decifratura e contenuto verificati sul server. Replica periodica fuori server
   ancora assente; dettaglio in whatsapp-readiness-backup-copy.json.
 - Profilo italiano e fuso Europe/Rome salvati e riletti dopo reload.
-- CI e pubblicazione della nuova revisione ancora in corso a questo checkpoint.
+- Revisione finale pubblicata e controllata nel browser; nessun numero associato.
+- Controllo risorse dopo il deploy: circa 16 GiB liberi (84% disco usato),
+  4,9 GiB RAM disponibile, nessuno swap. Rimossi soltanto i due archivi temporanei
+  di trasferimento di questa verifica; immagini Docker per rollback conservate.
+
+## Pubblicazione e verifica browser
+
+Pubblicazione finale: immagine `1.70.0-it.c7a2341af80370e3054e98162163c8ef926e159a`,
+CI [37207912711](https://github.com/ilpiratacris/WhatsApp-DeskcommCRM/actions/runs/37207912711)
+riuscita: typecheck, lint senza errori (avvisi preesistenti), 65 test in otto file.
+La prova che rimuove temporaneamente la guardia dei contatti fallisce come atteso;
+guardia ripristinata prima del build. Immagine derivata dal tag stabile, senza
+aggiornare il codice funzionale a una versione upstream successiva.
+
+Health pubblico HTTPS e Docker healthy dopo il deploy, Supabase/Redis/WAHA ok.
+Ricreato solo app con i quattro overlay: 43 container invariati, inclusi gli
+altri cinque CRM. Dettaglio in whatsapp-readiness-deploy.json.
+Artefatto trasferito e confrontato sul server: SHA-256
+`e2243fc8a4f5643cf04ae51c9981aa4e91aa98fc32a02ac715d2dff63e609247`.
+La revisione precedente 8d3898f è stata verificata prima di questo ultimo lotto;
+le prove di Profilo e Sicurezza provengono da quella revisione, senza modifiche
+successive a quelle funzioni.
+
+Prove browser nel contesto autenticato:
+
+| Percorso | Riscontro |
+| --- | --- |
+| Connessioni | Distinto «connessione configurata» da «Disconnesso»; QR rigenerato senza scansione. |
+| Accesso IA | Modalità test, elenco vuoto: nessuna risposta automatica autorizzata. |
+| Protezioni per l’invio | Modulo caricato; invio graduale attivo, limite iniziale 20/giorno più restrittivo di 250/giorno; fuso predefinito Europe/Rome. Nessuna modifica ai limiti. |
+| Gruppi | Spiegato che l’IA non risponde nei gruppi; elenco indisponibile finché WhatsApp non è associato. Nessun gruppo attivato. |
+| Sicurezza | Testi MFA/obbligo del team/codici di recupero leggibili; chiamate vocali assenti e disattivate. MFA ancora da attivare dal titolare. |
+| Profilo | Italiano e Europe/Rome persistono dopo reload. |
+| Password | Modulo /login/reset disponibile da autenticato; nessuna password inserita. |
+| Messaggi | Inbox caricata senza conversazioni reali; ricezione/invio ancora da provare. |
+| Agenda | Date italiane caricate senza errore; sincronizzazione Google non configurata. |
+| Contatti | Invio modulo senza email/telefono rifiutato con messaggio esplicito. |
+
+Il browser ha evidenziato altre otto etichette ambigue presenti nel tag stabile,
+incluse «Ricollegamento» e «Liberazione del servizio pubblico»: sostituite da
+«Ricollega» e «Attiva le risposte automatiche a tutti». Nella revisione finale
+entrambi i pulsanti sono stati riletti nel browser: Ricollega ha rigenerato il QR,
+il modulo IA mostrava modalità test ed elenco vuoto. Verificati anche fuso delle
+fasce di invio, ritardo della prima risposta, millisecondi per carattere e nomi
+geografici. Nessuna protezione salvata o risposta pubblica attivata. Nessun warning
+o errore nei log console catturati per questa sessione; questo non copre tutti
+gli errori intermittenti o percorsi dell’applicazione.
+
+Immagini di prova: readiness-profile.png, readiness-security.png,
+readiness-protections.png, readiness-ai-access.png e readiness-connections.png.
+Il QR, i segreti e i backup privati non sono nel repository.
+
+## Limiti prima dell’uso esteso
+
+Ricezione, invio, riconnessione del numero e ripristino di una sessione autenticata
+richiedono il successivo test del titolare. SMTP/recupero email e integrazioni
+Google/Meta/IA esterna non configurati. Capacità sotto carico non collaudata.
+Replica automatica dei backup fuori server non attiva. Rimangono traduzioni da
+rivedere fuori dal percorso di primo collegamento, alcuni nomi tecnici/etichette
+portoghesi e dati predefiniti brasiliani. La preparazione abilita un primo test
+controllato, non certifica l’uso esteso con dati di clienti.
+
+Nessuna nuova funzione: nessuna nuova voce richiesta nella Gestione funzioni
+dell’amministratore. Documentazione, Novità e grafo dell’italiano aggiornati;
+`graft build` e `graft check` riusciti (grafo strutturale, livello semantico non generato).
 
 ## Primo collegamento del titolare
 
