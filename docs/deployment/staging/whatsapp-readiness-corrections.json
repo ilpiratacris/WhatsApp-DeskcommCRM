@@ -623,5 +623,45 @@
     "source": "A verificação em duas etapas da sua conta, os códigos de recuperação e as sessões abertas.",
     "before": "Verifica a due passi del tuo account, codici di recupero e sessioni aperte.",
     "after": "Verifica in due passaggi, codici di recupero e sessioni del tuo account."
+  },
+  {
+    "source": "Liberar atendimento ao público",
+    "before": "Liberazione del servizio pubblico",
+    "after": "Attiva le risposte automatiche a tutti"
+  },
+  {
+    "source": "Reconectar",
+    "before": "Ricollegamento",
+    "after": "Ricollega"
+  },
+  {
+    "source": "Fuso horário da janela",
+    "before": "Zona di tempo della finestra",
+    "after": "Fuso orario delle fasce di invio"
+  },
+  {
+    "source": "Milissegundos por caractere da resposta",
+    "before": "Milissecondi per carattere di risposta",
+    "after": "Millisecondi per carattere della risposta"
+  },
+  {
+    "source": "Quanto o agente \"pensa\" antes de mandar a primeira resposta (ver a notificação + digitação por caractere, limitado entre o mínimo e o máximo). Campo vazio usa o padrão — rápido demais parece robô; lento demais parece que caiu. Não mexe no intervalo entre mensagens.",
+    "before": "Quando l'agente \"pensa\" prima di inviare la prima risposta (vedere la notifica + digitazione per carattere, limitato tra minimo e massimo). Campo vuoto utilizza il modello — troppo veloce sembra robot; troppo lento sembra caduto.",
+    "after": "Ritardo prima della prima risposta dell’IA: tempo di lettura della notifica più tempo di digitazione per carattere, entro i limiti minimo e massimo. Lascia vuoto per usare i valori predefiniti. Un ritardo troppo breve appare automatico; uno troppo lungo può far pensare che la connessione sia interrotta. Questa impostazione non cambia l’intervallo tra messaggi."
+  },
+  {
+    "source": "Assunção (Paraguai)",
+    "before": "Assunzione (Paraguay)",
+    "after": "Asunción (Paraguay)"
+  },
+  {
+    "source": "Recife (Brasil)",
+    "before": "Recuperare (Brasile)",
+    "after": "Recife (Brasile)"
+  },
+  {
+    "source": "Fortaleza (Brasil)",
+    "before": "Fortezza (Brasile)",
+    "after": "Fortaleza (Brasile)"
   }
 ]

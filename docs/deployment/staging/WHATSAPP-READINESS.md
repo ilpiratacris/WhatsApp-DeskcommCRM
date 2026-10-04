@@ -7,7 +7,7 @@ collegato e nessun messaggio inviato durante la preparazione.
 
 ## Preparazione locale
 
-125 correzioni editoriali del percorso QR/codice, gruppi, accesso IA e protezioni
+133 correzioni editoriali del percorso QR/codice, gruppi, accesso IA e protezioni
 di invio e Sicurezza in whatsapp-readiness-corrections.json. I limiti riducono il rischio
 di blocco: non garantiscono che WhatsApp non blocchi un numero.
 Il catalogo completo contiene ancora testi da rivedere; questo report non
@@ -31,13 +31,23 @@ certifica la traduzione integrale né le integrazioni esterne non configurate.
   per organizzazioni, utenti, contatti e sessioni. Database live non modificato;
   dettaglio in whatsapp-readiness-restore.json.
 - WAHA Core 2026.7.2 non firma i webhook: firma obbligatoria disattivata come da
-  contratto stabile; URL con token per sessione, WAHA su rete privata. Non abilitare
+  contratto stabile. Il webhook globale usa `http://app:3000/api/v1/webhooks/waha`
+  sulla rete privata: richiesta sintetica senza sessione registrata restituisce
+  200 e `accepted:false`; lo stesso percorso pubblico restituisce 403. Le sessioni
+  ereditano questa configurazione globale e non hanno webhook propri. Non abilitare
   la richiesta di firma senza un provider che effettivamente firmi.
+- Copia cifrata iniziale fuori server scaricata e confrontata tramite SHA-256;
+  decifratura e contenuto verificati sul server. Replica periodica fuori server
+  ancora assente; dettaglio in whatsapp-readiness-backup-copy.json.
+- Profilo italiano e fuso Europe/Rome salvati e riletti dopo reload.
 - CI e pubblicazione della nuova revisione ancora in corso a questo checkpoint.
 
 ## Primo collegamento del titolare
 
-1. Impostazioni → Sicurezza: sostituire la password provvisoria e attivare MFA.
+1. Da autenticato aprire https://deskcomm-staging.cristianocosta.it/login/reset
+   e sostituire la password provvisoria; poi Impostazioni → Sicurezza → Attiva
+   per la verifica in due passaggi. Modulo password e pagina Sicurezza verificati;
+   nessuna nuova credenziale inserita durante il controllo.
 2. Connessioni → WhatsApp tramite QR → Ricollega: sul telefono, WhatsApp →
    Dispositivi collegati → Collega un dispositivo; scansionare il QR corrente.
 3. Lasciare IA in modalità test con elenco vuoto; nessuna campagna attiva.
