@@ -77,7 +77,7 @@
       "lane": "qualita",
       "col": 4,
       "type": "service",
-      "label": "Test token, date Agenda, navigazione e diagnostica browser"
+      "label": "65 test CI / date Agenda e contatti vuoti / accettazione browser staging"
     }
   ],
   "edges": [
