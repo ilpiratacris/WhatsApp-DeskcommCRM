@@ -3,7 +3,7 @@
   "diagram_type": "architecture",
   "meta": {
     "title": "Note WhatsApp nello staging",
-    "subtitle": "Tre fonti approvate, lettura SSH; storico e connettore ancora aperti",
+    "subtitle": "Tre fonti approvate, archivio e ricerca SSH; copertura e connettore ancora aperti",
     "output": "whatsapp-notes-staging.html",
     "quality_profile": "standard"
   },
@@ -84,7 +84,7 @@
       "lane": "owner",
       "col": 1,
       "type": "external",
-      "label": "Storico: store WAHA indisponibile; export TXT ancora necessario"
+      "label": "Storico: 3 export TXT importati; store WAHA indisponibile; copertura non verificata"
     },
     {
       "id": "archive",
@@ -169,9 +169,10 @@
     }
   ],
   "contracts": {
-    "status": "Taccuino operativo: 3 note, ricerca browser e CLI verificate. Acquisizione manuale; storico e integrazioni non completati.",
+    "status": "Taccuino operativo: 1628 record, di cui 1625 da export. Ricerca e idempotenza verificate; acquisizione CRM manuale e copertura WhatsApp non verificata.",
     "pending": [
-      "importazione export selezionati",
+      "confronto copertura export con il telefono",
+      "recupero media omessi",
       "organizzazione delle note confermata dal titolare",
       "connettore ChatGPT circoscritto"
     ],

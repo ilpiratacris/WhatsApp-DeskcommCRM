@@ -133,6 +133,16 @@ class AcceptanceTests(Base):
         self.assertEqual(self.cli("stats")[0], 2)
         self.assertEqual(Path(self.db).stat().st_mode & 0o777, 0o644)
 
+    def test_viewer_coverage_notice_remains_true_after_export_import(self):
+        text = "01/02/24, 10:00 - Cris: nota storica sintetica\n"
+        code, _, err = self.cli("import", "--file", self.write("chat.txt", text), *OWNER_ARGS)
+        self.assertEqual(code, 0, err)
+        with contextlib.closing(na.open_db(self.db, readonly=True)) as conn:
+            page = na.render_stats(conn)
+        self.assertIn("export importati", page)
+        self.assertIn("completezza rispetto a WhatsApp non è verificata", page)
+        self.assertNotIn("servono gli export dei tre gruppi", page)
+
     def test_search_page_preserves_applied_group_and_limit(self):
         self.sync([rec()])
         with contextlib.closing(na.open_db(self.db, readonly=True)) as conn:

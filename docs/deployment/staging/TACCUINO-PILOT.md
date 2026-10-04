@@ -13,7 +13,7 @@ L'accesso resta quello dell'operatore tramite SSH; sul server il visualizzatore
 usa un socket UNIX privato, accessibile soltanto a root. Un tunnel SSH lo rende
 consultabile sul loopback del computer dell'operatore. Non è una pagina pubblica del CRM.
 
-## Recupero dello storico: risultato dell'audit
+## Recupero dello storico: risultato dell'audit iniziale
 
 Il 4 ottobre 2026 WAHA 2026.7.2 NOWEB CORE ha una sessione WORKING.
 Gli endpoint dei tre gruppi restituiscono HTTP 400 perché lo store non è abilitato.
@@ -122,10 +122,50 @@ Il servizio riavvia soltanto sé stesso in caso di guasto; non ripara o sovrascr
 note in conflitto. Nessuna funzione è stata aggiunta al pannello admin del CRM:
 questo è un modulo operativo SSH separato, non una nuova rotta del prodotto.
 
+### Importazione degli export recuperati dalle sessioni Work
+
+Aggiornamento del 4 ottobre 2026, dopo il baseline iniziale a tre note:
+gli strumenti ufficiali dell'app hanno individuato e reso accessibili gli allegati
+delle sessioni **Organizzazione cronologia chat** (Note), **Organizza cronologia chat**
+(AI) e **Analisi cronologia WhatsApp** (Tools). Nessun messaggio è stato inviato
+alle sessioni. Non è stato necessario chiedere al titolare di ricaricare gli ZIP.
+
+I tre ZIP contengono un solo TXT ciascuno. Copie persistenti e TXT estratti sono
+fuori Git in `%LOCALAPPDATA%/DeskcommTaccuino/imports/2026-10-04`, con ACL riservata
+al titolare e SYSTEM. Sul server i TXT sono in
+`/var/lib/deskcomm-taccuino/imports/2026-10-04` (directory 700, file 600).
+L'anteprima non mostra contenuti, ha trovato soltanto l'autore del titolare e zero
+errori di formato. Usato ordine date `dmy` e fuso `Europe/Rome`, coerente con
+l'ambiente del titolare; il confronto con gli orari sul telefono resta aperto.
+
+| Fonte  | Record importati | Testi | Riferimenti a media omessi | Righe di sistema escluse |
+| ------ | ---------------: | ----: | -------------------------: | -----------------------: |
+| Note   |             1057 |   790 |                        267 |                       70 |
+| AI     |              252 |   243 |                          9 |                        3 |
+| Tools  |              316 |   285 |                         31 |                        9 |
+| Totale |             1625 |  1318 |                        307 |                       82 |
+
+Archivio risultante: **1628 record**, inclusi i tre messaggi già acquisiti dal CRM.
+Le tre sovrapposizioni CRM/export vengono segnalate mantenendo la provenienza.
+Ripetendo l'importazione: **zero nuovi record e 1625 duplicati riconosciuti**.
+Ricerca letterale su contenuti importati verificata in tutte e tre le fonti senza
+stampare i testi. Statistiche reali verificate nel browser; nessun contenuto dei
+gruppi è incluso nelle prove visive o nei report Git.
+
+Backup prima dell'importazione (3 record) e dopo l'importazione (1628 record):
+SQLite integrity_check ok e confronto esatto di fonte, ID, data e testo superato.
+Il modulo aggiornato passa **44 test su Linux**. L'avviso italiano ora distingue
+export importati e completezza non verificata, evitando di chiedere export già
+acquisiti. Il CRM resta separato; nessun invio WhatsApp o modifica dello store.
+
+Non sono stati consultati URL o contenuti degli allegati; nessuna trascrizione
+grezza è stata inviata a Claude, copiata in wiki o committata.
+
 ### Limiti e passo successivo
 
-- **Storico:** servono i tre export TXT. Importatore provato su fixture, ancora
-  da verificare sugli export reali e confrontare con il telefono.
+- **Storico:** i tre export reali sono importati e verificati per idempotenza.
+  Resta da confrontare la copertura con il telefono: non è dimostrata la completezza
+  dalla creazione dei gruppi, né l'assenza di messaggi esclusi dall'export WhatsApp.
 - **Aggiornamento:** l'acquisizione è manuale, con massimo 100 messaggi per lettura.
   Non è ancora un archivio che si aggiorna automaticamente né una scansione completa.
 - **Allegati:** conservati solo riferimenti a media omessi negli export, non i file.
@@ -138,8 +178,8 @@ questo è un modulo operativo SSH separato, non una nuova rotta del prodotto.
 - **Organizzazione:** categorie suggerite da regole testuali, da confermare;
   ricerca semantica, progetti strutturati e integrazioni ChatGPT/Hindsight non implementati.
 
-Il prossimo test utile è importare gli export reali dei tre gruppi, verificare
-conteggi e intervalli con il titolare e cercare una sua nota di progetto.
+Il prossimo test utile è confrontare conteggi e intervalli con il titolare e
+recuperare una sua nota di progetto dall'archivio storico già importato.
 Le altre chat restano escluse. Nessun messaggio è stato inviato durante questo pilota.
 
 ## Provenienza

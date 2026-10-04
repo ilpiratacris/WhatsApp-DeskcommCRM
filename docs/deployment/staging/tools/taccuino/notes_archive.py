@@ -530,8 +530,8 @@ def _page(title: str, body: str) -> str:
     return (f'<!doctype html><html lang="it"><head><meta charset="utf-8"><title>{E(title)} · Taccuino</title>'
             f'<style>{CSS}</style></head><body><nav><a href="/">Taccuino</a> · <a href="/stats">Statistiche</a>'
             f' · <a href="/search">Ricerca</a></nav><h1>{E(title)}</h1>'
-            '<p class="warn">Archivio parziale: sono presenti le note già acquisite. '
-            'Per le note precedenti servono gli export dei tre gruppi. Questa pagina consente solo la lettura.</p>'
+            '<p class="warn">Archivio parziale: le statistiche distinguono messaggi del CRM ed export importati. '
+            'La completezza rispetto a WhatsApp non è verificata. Questa pagina consente solo la lettura.</p>'
             f'{body}</body></html>')
 
 

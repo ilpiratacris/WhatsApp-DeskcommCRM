@@ -131,7 +131,7 @@ python -m unittest discover -v
 ```
 
 I test usano solo dati sintetici e directory temporanee. Su sistemi senza symlink, senza permessi POSIX o senza database IANA, alcuni test vengono saltati.
-Consegna del 4 ottobre 2026: **43 test superati sul server Linux**, inclusi quelli
+Consegna aggiornata del 4 ottobre 2026: **44 test superati sul server Linux**, inclusi quelli
 di accettazione. Risultati reali e limiti nel [report del pilota](../../TACCUINO-PILOT.md).
 
 ## Installazione e accesso verificati sul server

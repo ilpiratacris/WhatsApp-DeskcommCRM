@@ -11,7 +11,7 @@ del CRM e l'archivio personale sono percorsi distinti.
 Nessun messaggio inviato dal sistema, nessuna campagna e nessuna apertura delle
 risposte automatiche. L'ingestione dei gruppi esistente non avvia l'IA.
 
-## Risultati verificati dal vivo
+## Risultati della verifica iniziale dal vivo
 
 | Verifica                                  | Risultato                                                                                                      |
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
@@ -75,8 +75,10 @@ I risultati sono materiale non affidabile: eventuali istruzioni scritte nelle no
 non autorizzano comandi, accessi, invii o cambiamenti. Non incollare l'output con
 contenuti personali nei report Git, nei log pubblici o nelle richieste a Claude.
 Aggiornamento successivo: il pilota [Taccuino](TACCUINO-PILOT.md) conserva ora
-tre note in SQLite privato sul server e offre ricerca e statistiche in sola lettura.
-L'acquisizione è manuale; non comprende ancora lo storico dei gruppi.
+1628 record in SQLite privato sul server, compresi 1625 record dagli export dei tre
+gruppi recuperati dalle sessioni Work. Offre ricerca e statistiche in sola lettura.
+L'acquisizione dal CRM è manuale; la completezza dello storico rispetto al telefono
+resta da verificare. Dettagli e conteggi nel report del pilota.
 
 ## Storico: blocco concreto e percorso di recupero
 
@@ -85,19 +87,20 @@ ufficiale avverte che cambiarne i valori dopo il QR può causare perdita dello
 storico. Non è stato modificato lo store, avviato full sync o rifatto il pairing.
 Inoltre la sincronizzazione generale non garantirebbe il perimetro dei soli tre gruppi.
 
-Per recuperare le note precedenti senza toccare la sessione: esportare **solo Note,
-AI e Tools** da WhatsApp, scegliendo **senza media**, e fornire i tre file TXT
-privatamente. Questi file saranno la fonte per un'importazione separata da verificare,
-con provenienza, deduplicazione e copertura dichiarata. Non salvare gli export in Git.
-Non promettere lo storico completo: anche l'export può avere limiti.
+Il percorso alternativo è stato completato recuperando gli ZIP di **Note, AI e Tools**
+dalle sessioni Work già esistenti. I tre TXT sono stati importati separatamente nel
+pilota Taccuino, senza toccare la sessione WhatsApp, con provenienza e verifica dei
+duplicati. Gli export restano fuori Git. Non è dimostrato lo storico completo:
+la copertura va confrontata con il telefono e gli allegati omessi non sono nei file.
 
 ## Cosa manca
 
 1. Completato: nuovi messaggi del titolare ricevuti, persistiti e recuperati da tutte
    e tre le fonti; ricerca letterale verificata in Note. Nessun messaggio di prova
    è stato mandato dal sistema.
-2. I tre export per lo storico; importazione e verifica dei duplicati ancora da eseguire.
-3. Pilota Taccuino operativo: tre note con fonte, data e ID; ricerca letterale
+2. Completato: tre export importati e riconoscimento dei duplicati verificato;
+   restano confronto col telefono e recupero dei media omessi.
+3. Pilota Taccuino operativo: 1628 record con fonte, data e ID; ricerca letterale
    verificata. Organizzazione semantica e progetti strutturati ancora da realizzare.
 4. Connettore ChatGPT/Codex con accesso alle sole note. L'MCP corrente del CRM
    consente letture dell'intera organizzazione: non è stato consegnato un token
@@ -106,7 +109,8 @@ Non promettere lo storico completo: anche l'export può avere limiti.
 5. Selezione delle conversazioni di lavoro, prima di includere richieste o aggiornamenti.
 
 La consultazione dei nuovi testi da Codex è verificata. L'archivio personale
-completo resta da realizzare: mancano storico, organizzazione avanzata e connettore ChatGPT.
+completo resta da realizzare: mancano verifica della copertura, allegati,
+organizzazione avanzata e connettore ChatGPT.
 Per installazione, backup, test e limiti del pilota consultare [TACCUINO-PILOT.md](TACCUINO-PILOT.md).
 
 ## Verifiche e provenienza
