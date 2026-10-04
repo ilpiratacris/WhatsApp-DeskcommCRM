@@ -36,6 +36,20 @@ gruppo. La prova visiva omette numero, identificatori, contenuti e nomi delle ch
 
 ## Prima consultazione da Codex
 
+### Accettazione dei nuovi messaggi, 4 ottobre 2026
+
+Dopo l'invio dal telefono da parte del titolare, il controllo live ha rilevato
+un messaggio archiviato e un testo leggibile in ciascuna fonte: Note, AI e Tools.
+Il lettore SSH ha recuperato tutti e tre i testi; la ricerca letterale del messaggio
+di prova concordato ha restituito la nota corrispondente in Note. Sono quindi
+verificate ricezione, persistenza e consultazione dei nuovi messaggi delle tre fonti.
+I testi, gli identificatori e le trascrizioni non sono conservati in questo report.
+Il lettore ha ripetuto anche il controllo dei partecipanti e del perimetro autorizzato.
+Nessun messaggio è stato inviato dal sistema durante la verifica.
+
+Questo controllo supera il limite della query inizialmente vuota riportata sopra;
+non dimostra recupero dello storico, indicizzazione o collegamento a ChatGPT.
+
 È stato installato un **lettore operativo via SSH**, non un connettore MCP:
 [sorgente](tools/read-whatsapp-notes.py). La ricevuta privata contenente gli ID
 esatti autorizzati vive soltanto sul server, con permessi 600. Il lettore:
@@ -77,8 +91,8 @@ Non promettere lo storico completo: anche l'export può avere limiti.
 
 ## Cosa manca
 
-1. Un nuovo messaggio scritto dal titolare in una delle tre fonti, per provare
-   ricezione reale, persistenza e ricerca col lettore. Nessun messaggio di prova
+1. Completato: nuovi messaggi del titolare ricevuti, persistiti e recuperati da tutte
+   e tre le fonti; ricerca letterale verificata in Note. Nessun messaggio di prova
    è stato mandato dal sistema.
 2. I tre export per lo storico; importazione e verifica dei duplicati ancora da eseguire.
 3. Archivio personale organizzato e indicizzazione, con riferimento alla nota originale.
@@ -88,8 +102,8 @@ Non promettere lo storico completo: anche l'export può avere limiti.
    una condivisione automatica né un connettore ChatGPT.
 5. Selezione delle conversazioni di lavoro, prima di includere richieste o aggiornamenti.
 
-Prima di dichiarare operativo l'archivio serve almeno una nota reale recuperata e
-ricercabile. Configurazione salvata e query vuota non provano questa accettazione.
+La consultazione dei nuovi testi da Codex è verificata. L'archivio personale
+completo resta da realizzare: mancano storico, organizzazione e connettore ChatGPT.
 
 ## Verifiche e provenienza
 
