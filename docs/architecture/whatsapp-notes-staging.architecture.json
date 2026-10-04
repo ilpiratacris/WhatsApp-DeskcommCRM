@@ -8,9 +8,18 @@
     "quality_profile": "standard"
   },
   "lanes": [
-    { "id": "owner", "label": "Titolare" },
-    { "id": "crm", "label": "CRM esistente" },
-    { "id": "operator", "label": "Lettura operativa privata" }
+    {
+      "id": "owner",
+      "label": "Titolare"
+    },
+    {
+      "id": "crm",
+      "label": "CRM esistente"
+    },
+    {
+      "id": "operator",
+      "label": "Lettura operativa privata"
+    }
   ],
   "mainPath": ["groups", "switch", "allowlist", "messages", "reader", "codex"],
   "nodes": [
@@ -78,22 +87,41 @@
       "label": "Storico: store WAHA indisponibile; export TXT ancora necessario"
     },
     {
-      "id": "connector",
+      "id": "archive",
+      "lane": "operator",
+      "col": 6,
+      "type": "database",
+      "label": "Taccuino / SQLite privato fuori Git / date e provenienza"
+    },
+    {
+      "id": "viewer",
       "lane": "owner",
-      "col": 5,
-      "type": "external",
-      "label": "ChatGPT/MCP circoscritto: NON implementato"
+      "col": 7,
+      "type": "frontend",
+      "label": "Ricerca italiana in sola lettura / socket UNIX privato e tunnel SSH"
     }
   ],
   "edges": [
-    { "from": "groups", "to": "switch", "label": "abilitazione autorizzata" },
-    { "from": "switch", "to": "allowlist", "label": "PUT e rilettura elenco" },
+    {
+      "from": "groups",
+      "to": "switch",
+      "label": "abilitazione autorizzata"
+    },
+    {
+      "from": "switch",
+      "to": "allowlist",
+      "label": "PUT e rilettura elenco"
+    },
     {
       "from": "allowlist",
       "to": "messages",
       "label": "scarta gruppi esclusi prima dell'inserimento"
     },
-    { "from": "groups", "to": "receipt", "label": "verifica live di ID e unico partecipante" },
+    {
+      "from": "groups",
+      "to": "receipt",
+      "label": "verifica live di ID e unico partecipante"
+    },
     {
       "from": "receipt",
       "to": "reader",
@@ -104,8 +132,36 @@
       "to": "reader",
       "label": "ID esatti + org + sessione; outbound e non revocati"
     },
-    { "from": "reader", "to": "codex", "label": "SSH già autorizzato / testo non affidabile" },
-    { "from": "reader", "to": "coverage", "label": "conteggi, copertura e ricerca" },
+    {
+      "from": "reader",
+      "to": "codex",
+      "label": "SSH già autorizzato / testo non affidabile"
+    },
+    {
+      "from": "reader",
+      "to": "coverage",
+      "label": "conteggi, copertura e ricerca"
+    },
+    {
+      "from": "reader",
+      "to": "archive",
+      "label": "snapshot validato / finestra max 100 dichiarata"
+    },
+    {
+      "from": "history",
+      "to": "archive",
+      "label": "import TXT privato dopo anteprima / export necessari"
+    },
+    {
+      "from": "archive",
+      "to": "viewer",
+      "label": "query parametrizzate / nessun invio"
+    },
+    {
+      "from": "viewer",
+      "to": "coverage",
+      "label": "errori e lacune richiedono revisione operatore"
+    },
     {
       "from": "coverage",
       "to": "switch",
@@ -113,13 +169,16 @@
     }
   ],
   "contracts": {
-    "status": "Configurazione e lettore verificati con zero messaggi. Nessuna importazione o condivisione automatica.",
+    "status": "Taccuino operativo: 3 note, ricerca browser e CLI verificate. Acquisizione manuale; storico e integrazioni non completati.",
     "pending": [
-      "prima nota reale ricevuta e ricercabile",
       "importazione export selezionati",
-      "archivio organizzato",
+      "organizzazione delle note confermata dal titolare",
       "connettore ChatGPT circoscritto"
     ],
-    "destination": "infrastruttura operativa staging; nessuna modifica del runtime CRM"
+    "destination": "infrastruttura operativa staging; nessuna modifica del runtime CRM",
+    "non_connections": {
+      "ChatGPT/MCP": "Connettore circoscritto non implementato; nessun flusso dati presente",
+      "Atlante proposto / Hindsight": "Importazione in pausa; nessuna integrazione o chiamata presente"
+    }
   }
 }

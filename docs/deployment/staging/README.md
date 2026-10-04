@@ -1,5 +1,8 @@
 # Staging sul server Coolify
 
+[Taccuino — pilota archivio note WhatsApp](TACCUINO-PILOT.md): recuperabilità,
+archivio privato, ricerca e collegamenti futuri alla memoria.
+
 Configurazione specifica di `deskcomm-staging.cristianocosta.it`.
 [Report con prove e limiti](../../handoffs/REPORT-ilpiratacris-staging.md).
 Stack gestito via SSH/Compose, non come risorsa applicativa nel pannello.
