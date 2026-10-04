@@ -7,7 +7,7 @@ collegato e nessun messaggio inviato durante la preparazione.
 
 ## Preparazione locale
 
-Correzioni editoriali del percorso QR/codice, gruppi, accesso IA e protezioni
+106 correzioni editoriali del percorso QR/codice, gruppi, accesso IA e protezioni
 di invio in whatsapp-readiness-corrections.json. I limiti riducono il rischio
 di blocco: non garantiscono che WhatsApp non blocchi un numero.
 Il catalogo completo contiene ancora testi da rivedere; questo report non
@@ -23,9 +23,17 @@ certifica la traduzione integrale né le integrazioni esterne non configurate.
 - QR generato dal browser senza scansione; una sessione in attesa di connessione.
 - Nessun secondo fattore verificato: cambio password provvisoria e attivazione
   MFA restano azioni del titolare prima dell’uso con dati personali.
-- Primo backup riuscito: database, sessioni e Storage. Verifica del ripristino,
-  programmazione giornaliera, CI e pubblicazione sono riportate nella sezione
-  finale dopo l’esecuzione: questa versione è il checkpoint prima del deploy.
+- Backup database, sessioni e Storage riusciti; wrapper verificato e cron attivo
+  ogni giorno alle 03:00 Europe/Berlin (stesso orario italiano). Archivi privati,
+  conservazione 14 copie per tipo. Replica automatica fuori server ancora assente.
+- Ripristino completo del dump con ON_ERROR_STOP in container senza rete/porte,
+  database nuovo template0 e stesse estensioni: riuscito. Conteggi confrontati
+  per organizzazioni, utenti, contatti e sessioni. Database live non modificato;
+  dettaglio in whatsapp-readiness-restore.json.
+- WAHA Core 2026.7.2 non firma i webhook: firma obbligatoria disattivata come da
+  contratto stabile; URL con token per sessione, WAHA su rete privata. Non abilitare
+  la richiesta di firma senza un provider che effettivamente firmi.
+- CI e pubblicazione della nuova revisione ancora in corso a questo checkpoint.
 
 ## Primo collegamento del titolare
 

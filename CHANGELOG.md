@@ -10,7 +10,7 @@ Se você roda o DeskcommCRM numa VPS, **leia a seção da versão para a qual es
 
 ### Corrigido
 
-- **Preparazione WhatsApp staging**: chiariti collegamento QR/codice, accesso dell’IA, gruppi e protezioni per l’invio. Backup dedicati e verifiche nel report `docs/deployment/staging/WHATSAPP-READINESS.md`.
+- **Preparazione WhatsApp staging**: chiariti collegamento QR/codice, accesso dell’IA, gruppi e protezioni per l’invio. Distinti i contatori delle connessioni configurate dagli stati collegati; backup giornaliero e ripristino isolato verificati. Dettagli nel report `docs/deployment/staging/WHATSAPP-READINESS.md`.
 
 - **Verifica browser staging**: corretti formati data italiani dell'Agenda e rifiuto di contatti manuali senza email o telefono. Report e limiti in `docs/deployment/staging/BROWSER-CHECK.md`.
 

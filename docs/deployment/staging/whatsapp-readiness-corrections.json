@@ -493,5 +493,40 @@
     "source": "Nenhum agente publicado",
     "before": "Nessun membro del personale pubblicato",
     "after": "Nessun agente pubblicato"
+  },
+  {
+    "source": "Caiu",
+    "before": "E' a terra.",
+    "after": "Disconnesso"
+  },
+  {
+    "source": "Escaneie o QR",
+    "before": "Scansione del QR",
+    "after": "Scansiona il QR"
+  },
+  {
+    "source": "Escanear o QR",
+    "before": "Scansione del QR",
+    "after": "Scansiona il QR"
+  },
+  {
+    "source": "Onde obter o token",
+    "before": "Dove trovare il gettone",
+    "after": "Dove trovare il token"
+  },
+  {
+    "source": "Buscar telas",
+    "before": "Ricerca di tele",
+    "after": "Cerca una sezione"
+  },
+  {
+    "source": "número conectado",
+    "before": "numero collegato",
+    "after": "connessione configurata"
+  },
+  {
+    "source": "números conectados",
+    "before": "numeri collegati",
+    "after": "connessioni configurate"
   }
 ]
