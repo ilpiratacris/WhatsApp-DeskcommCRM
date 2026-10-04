@@ -51,6 +51,20 @@ describe("italiano: catálogo, parâmetros e preferência", () => {
     );
   });
 
+  it.each([
+    ["MMMM 'de' yyyy", "ottobre 2026"],
+    ["d 'de' MMM", "4 ott"],
+    ["d 'de' MMMM", "4 ottobre"],
+    ["EEEE, d 'de' MMMM", "domenica, 4 ottobre"],
+    ["EEEE, d 'de' MMM", "domenica, 4 ott"],
+    ["d 'de' MMMM 'às' HH:mm", "4 ottobre alle 09:30"],
+    ["EEEE, d 'de' MMMM 'às' HH:mm", "domenica, 4 ottobre alle 09:30"],
+  ])("formata o padrão real da agenda %s sem corromper tokens", (padrao, esperado) => {
+    expect(format(new Date(2026, 9, 4, 9, 30), traduzir(padrao, "it"), {
+      locale: localeDeData("it"),
+    })).toBe(esperado);
+  });
+
   it.each([false, true])(
     "descreve o envio real quando habilitada=%s, sem confundir conexão e envio",
     async (habilitada) => {

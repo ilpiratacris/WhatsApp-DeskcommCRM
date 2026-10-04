@@ -10,6 +10,8 @@ Se você roda o DeskcommCRM numa VPS, **leia a seção da versão para a qual es
 
 ### Corrigido
 
+- **Verifica browser staging**: corretti formati data italiani dell'Agenda e rifiuto di contatti manuali senza email o telefono. Report e limiti in `docs/deployment/staging/BROWSER-CHECK.md`.
+
 - **Italiano secondo la funzione**: corretti testi fuorvianti di primo accesso, navigazione, azioni e stati. 521 voci riviste nel contesto e 214 uniformate nei termini; revisione editoriale del catalogo completo ancora aperta.
 
 ### Adicionado
