@@ -528,5 +528,100 @@
     "source": "números conectados",
     "before": "numeri collegati",
     "after": "connessioni configurate"
+  },
+  {
+    "source": "Verificação em duas etapas",
+    "before": "Verifica a due fasi",
+    "after": "Verifica in due passaggi"
+  },
+  {
+    "source": "Além da senha, o sistema pede um código de 6 dígitos que só existe no seu celular. É a proteção que segura uma senha vazada.",
+    "before": "Oltre alla password, il sistema richiede un codice a 6 cifre che esiste solo sul telefono.",
+    "after": "Oltre alla password, serve un codice a 6 cifre generato dall’app di autenticazione sul tuo telefono."
+  },
+  {
+    "source": "Exigir da equipe",
+    "before": "Richiesta dal team",
+    "after": "Obbligo per il team"
+  },
+  {
+    "source": "Escolha quem precisa configurar a verificação em duas etapas. Ligue se a sua equipe mexe com dados de clientes — é a diferença entre uma senha vazada virar um susto ou virar um vazamento.",
+    "before": "Scegli chi ha bisogno di impostare la verifica in due passaggi. Chiama se il tuo team mette in discussione i dati dei clienti — è la differenza tra una password trapelata che diventa una truffa o diventando una perdita.",
+    "after": "Scegli per quali ruoli rendere obbligatoria la verifica in due passaggi. È consigliata quando il team tratta dati dei clienti: protegge l’accesso anche se una password viene rubata."
+  },
+  {
+    "source": "Dias de carência",
+    "before": "Giorni di carenza",
+    "after": "Giorni concessi per attivarla"
+  },
+  {
+    "source": "O nível escolhido alcança esse papel e todos os acima dele. Quem já tem segundo fator continua provando a cada entrada, qualquer que seja esta escolha.",
+    "before": "Il livello prescelto raggiunge quel ruolo e tutti quelli sopra di esso. Chiunque ha già il secondo fattore continua a dimostrare ad ogni voce, qualunque sia questa scelta.",
+    "after": "L’obbligo si applica al ruolo scelto e ai ruoli superiori. Chi ha già attivato la verifica in due passaggi deve continuare a confermarla a ogni accesso, indipendentemente da questa impostazione."
+  },
+  {
+    "source": "A carência vai de 0 a 30 dias: durante o prazo ninguém é bloqueado, e depois dele a tela trava até o cadastro. O prazo começa na mudança da regra ou na entrada da pessoa na empresa, o que for mais tarde.",
+    "before": "La carenza varia da 0 a 30 giorni: durante la scadenza nessuno viene bloccato, e dopo di essa lo schermo si ferma fino alla registrazione. Il termine inizia quando cambia la regola o quando la persona entra in azienda, qualsiasi cosa sia dopo.",
+    "after": "Il periodo concesso va da 0 a 30 giorni. Alla scadenza, l’accesso viene bloccato finché la verifica in due passaggi non è attivata. Il conteggio parte dalla modifica della regola o dall’ingresso della persona nel team, scegliendo la data più recente."
+  },
+  {
+    "source": "Use se perder acesso ao autenticador. Cada código é de uso único.",
+    "before": "Utilizzare se si perde l'accesso all'autenticazione. Ogni codice è unico.",
+    "after": "Usa questi codici se perdi l’accesso all’app di autenticazione. Ogni codice può essere usato una sola volta."
+  },
+  {
+    "source": "Regenerar códigos de recuperação",
+    "before": "Rigenerare i codici di recupero",
+    "after": "Rigenera i codici di recupero"
+  },
+  {
+    "source": "Habilite MFA antes de gerar códigos.",
+    "before": "Abilitare MFA prima di generare i codici.",
+    "after": "Attiva la verifica in due passaggi prima di generare i codici di recupero."
+  },
+  {
+    "source": "Desligada. Ninguém consegue ligar nem receber chamadas por aqui.",
+    "before": "Nessuno puo' chiamare o chiamare qui.",
+    "after": "Funzione disattivata: da qui non è possibile effettuare né ricevere chiamate."
+  },
+  {
+    "source": "Leia antes de ligar",
+    "before": "Leggilo prima di chiamare",
+    "after": "Leggi prima di attivare le chiamate"
+  },
+  {
+    "source": "Para fazer chamadas, o sistema precisa conectar um segundo aparelho ao mesmo número de WhatsApp que você já usa para atender. Essa conexão não é feita pelo caminho oficial do WhatsApp.",
+    "before": "Per effettuare chiamate, il sistema deve collegare un secondo dispositivo allo stesso numero di WhatsApp che si utilizza già per rispondere. Questa connessione non è fatta dal percorso ufficiale di WhatsApp.",
+    "after": "Per effettuare chiamate, il sistema collega un secondo dispositivo al numero WhatsApp già usato per i messaggi. Il collegamento utilizza un’integrazione non ufficiale."
+  },
+  {
+    "source": "O WhatsApp pode entender isso como uso indevido e bloquear a CONTA — não só a chamada. Se isso acontecer, você perde também as mensagens desse número, e recuperar depende do WhatsApp, não de nós.",
+    "before": "WhatsApp può capire questo come uso improprio e bloccare il conto — non solo la chiamata. Se questo accade, si perde anche i messaggi da quel numero, e recuperare dipende da WhatsApp, non da noi.",
+    "after": "WhatsApp potrebbe considerarlo un uso improprio e bloccare l’account, impedendo anche l’invio e la ricezione dei messaggi. Il recupero dell’account dipende da WhatsApp."
+  },
+  {
+    "source": "Ligue apenas se a chamada de voz valer esse risco para o seu negócio. Você pode desligar a qualquer momento aqui mesmo — e o aparelho é desconectado na hora.",
+    "before": "Solo chiamare se la chiamata vocale vale quel rischio per il vostro business. È possibile appendere in qualsiasi momento proprio qui - e il dispositivo è scollegato in tempo.",
+    "after": "Attiva le chiamate solo se accetti questo rischio per la tua attività. Puoi disattivare la funzione da questa pagina: il dispositivo viene scollegato subito."
+  },
+  {
+    "source": "Este servidor não tem a chamada de voz instalada. Quem cuida da instalação precisa ligá-la antes — depois esta opção fica disponível aqui.",
+    "before": "Questo server non ha la chiamata vocale installata. Coloro che si prendono cura dell'installazione devono accenderlo prima — allora questa opzione è disponibile qui.",
+    "after": "Le chiamate vocali non sono installate su questo server. La funzione sarà disponibile dopo la configurazione da parte dell’amministratore del server."
+  },
+  {
+    "source": "Listagem de sessões — em breve. Por enquanto, deslogue todos os dispositivos:",
+    "before": "Elenco di sessione — presto. Per ora, scorrere tutti i dispositivi:",
+    "after": "L’elenco delle sessioni non è ancora disponibile. Puoi comunque uscire dall’account su tutti i dispositivi:"
+  },
+  {
+    "source": "Sair de todos os dispositivos",
+    "before": "Smettere tutti i dispositivi",
+    "after": "Esci da tutti i dispositivi"
+  },
+  {
+    "source": "A verificação em duas etapas da sua conta, os códigos de recuperação e as sessões abertas.",
+    "before": "Verifica a due passi del tuo account, codici di recupero e sessioni aperte.",
+    "after": "Verifica in due passaggi, codici di recupero e sessioni del tuo account."
   }
 ]

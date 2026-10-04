@@ -10,3 +10,5 @@ docs/deployment/staging/WHATSAPP-READINESS.md. Nessuna nuova funzione.
 
 Contatori corretti: una connessione configurata può essere disconnessa.
 Backup giornaliero e ripristino completo isolato verificati.
+
+Chiariti anche verifica in due passaggi, periodo concesso al team e uscita dalle sessioni.

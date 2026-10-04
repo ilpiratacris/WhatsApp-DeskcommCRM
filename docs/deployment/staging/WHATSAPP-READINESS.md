@@ -7,8 +7,8 @@ collegato e nessun messaggio inviato durante la preparazione.
 
 ## Preparazione locale
 
-106 correzioni editoriali del percorso QR/codice, gruppi, accesso IA e protezioni
-di invio in whatsapp-readiness-corrections.json. I limiti riducono il rischio
+125 correzioni editoriali del percorso QR/codice, gruppi, accesso IA e protezioni
+di invio e Sicurezza in whatsapp-readiness-corrections.json. I limiti riducono il rischio
 di blocco: non garantiscono che WhatsApp non blocchi un numero.
 Il catalogo completo contiene ancora testi da rivedere; questo report non
 certifica la traduzione integrale né le integrazioni esterne non configurate.
