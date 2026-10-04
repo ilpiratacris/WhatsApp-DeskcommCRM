@@ -297,4 +297,21 @@ Test aggiunti sulla diagnostica reale Google con invio attivo/disattivato e
 sugli attributi eseguibili del tracciamento. Aggiornati Novità e contratto
 architetturale; nessuna nuova funzione da inserire nel pannello amministrativo.
 
-Verifica CI e nuova pubblicazione staging: in corso, evidenze aggiunte dopo i controlli.
+### Evidenze della revisione pubblicata
+
+- Commit del codice: `7e0d18dcf54099eda6160ebb54760cd0ec9bf7bd`.
+- [Workflow staging 37162939077](https://github.com/ilpiratacris/WhatsApp-DeskcommCRM/actions/runs/37162939077): successo. Typecheck superato; lint 0 errori e 489 avvisi già presenti; 7 file di test e **54 test superati**. Primo run 37162793265 annullato per includere la correzione delle intestazioni CSV.
+- Base dell'immagine: release stabile **1.70.0**, commit upstream `cbf403e201627b49c0a9899f5a0cb5f12e02d975`, con overlay della presentazione italiana; non `latest`.
+- Graft rigenerato: 5.116 file, 26.055 nodi, 71.491 archi. `pnpm graft:check` superato; tier semantico `--deep` non costruito.
+- SHA256 archivio Docker locale e remoto coincidente: `e821785709a2e441c63b3b00b6eb07f7d1766f44c07ce57f19e66c25fa34f34d`.
+- Immagine attiva: `deskcomm-staging-it:7e0d18dcf54099eda6160ebb54760cd0ec9bf7bd`, con pull disattivato. Compose prod + single-server + traefik + staging, `--no-deps --no-build app`; ricreato solo `deskcomm-staging-app-1`.
+- Verifica delle 00:04 UTC del 4 ottobre: `/api/v1/health` pubblico HTTP 200, `healthy`, versione `1.70.0-it.7e0d18dcf54099eda6160ebb54760cd0ec9bf7bd`, Supabase/Redis/WAHA `ok`; app Docker healthy. TLS verificato senza disabilitare il controllo del certificato.
+- 44 container running prima e dopo: gli altri **43** mantengono gli stessi ID, orari di avvio e stato. Comprendono gli altri 5 servizi CRM, gli 11 Supabase dedicati e i 27 servizi estranei allo staging. Gli 11 container Supabase risultano healthy.
+- `/login` HTTPS HTTP 200. Sessione browser autenticata esistente mantenuta dopo il deploy; non è stata rieseguita l'immissione delle credenziali.
+- Browser: verificati menu distinti «Attività da svolgere» / «Registro delle attività», «Ricontatti automatici», contatti, finestra CSV con colonne originali e azione «Importa», etichetta «Nome della fase» nel funnel. Nessuna importazione o modifica dei dati.
+- [Prova visiva CSV](../deployment/staging/italiano-revisione-live.jpg), acquisita dopo il deploy. Il primo accesso è stato rivisto sul codice, senza riavviare l'onboarding dell'organizzazione già configurata.
+- Backup ambiente e confronto container conservati sul server sotto `.runtime`, senza credenziali nel repository. Nessun numero WhatsApp reale o provider IA aggiunto.
+
+La qualità editoriale completa resta aperta per i moduli specialistici e le frasi fuori dall'elenco; copertura delle chiavi e passaggio dei test non la certificano. Gli invii WhatsApp, le conversioni pubblicitarie e il comportamento dei provider non configurati non sono stati provati live. Il problema preesistente del workflow `release` del fork (`RELEASE_APP_ID` assente), descritto sopra, resta separato da questo workflow staging superato.
+
+Integrazione e push ordinario su `main`: da registrare dopo il confronto remoto.

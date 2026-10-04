@@ -49,6 +49,10 @@ revisione è in `italiano-revisione.json`.
 
 ## Verifica e limiti
 
+Il workflow Linux 37162939077 ha superato typecheck, lint senza errori e 54 test
+su 7 file. La revisione è pubblicata nello staging su base stabile 1.70.0.
+[Prova visiva dopo il deploy](italiano-revisione-live.jpg).
+
 Il test `i18n-italiano.test.ts` verifica copertura e conservazione dei token su
 tutto il catalogo. Esegue inoltre la funzione reale di diagnostica con invio
 attivo/disattivato e controlla l’italiano risultante. Un controllo separato

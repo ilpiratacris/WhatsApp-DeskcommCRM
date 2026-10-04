@@ -15,3 +15,6 @@ il pulsante indica l'azione «Importa» e le fasi del funnel hanno nomi coerenti
 Revisione delle frasi prioritarie distinta dall’uniformazione terminologica.
 Il catalogo completo non viene dichiarato interamente revisionato: dettagli
 e limiti in docs/deployment/staging/ITALIANO-REVISIONE.md.
+
+Verificati nello staging i testi del menu, delle fasi e della finestra CSV;
+resta aperta la revisione editoriale dei moduli specialistici.
