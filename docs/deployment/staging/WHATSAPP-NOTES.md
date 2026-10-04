@@ -101,7 +101,8 @@ la copertura va confrontata con il telefono e gli allegati omessi non sono nei f
 2. Completato: tre export importati e riconoscimento dei duplicati verificato;
    restano confronto col telefono e recupero dei media omessi.
 3. Pilota Taccuino operativo: 1628 record con fonte, data e ID; ricerca letterale
-   verificata. Organizzazione semantica e progetti strutturati ancora da realizzare.
+   verificata. Prima raccolta Note con categorie locali, indizi e paginazione;
+   organizzazione semantica e progetti strutturati ancora da realizzare.
 4. Connettore ChatGPT/Codex con accesso alle sole note. L'MCP corrente del CRM
    consente letture dell'intera organizzazione: non è stato consegnato un token
    generale per questo scopo. Il comando SSH è già disponibile, ma non costituisce

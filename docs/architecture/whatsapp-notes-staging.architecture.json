@@ -3,7 +3,7 @@
   "diagram_type": "architecture",
   "meta": {
     "title": "Note WhatsApp nello staging",
-    "subtitle": "Tre fonti approvate, archivio e ricerca SSH; copertura e connettore ancora aperti",
+    "subtitle": "Tre fonti approvate, archivio e prima raccolta Note; copertura e connettore ancora aperti",
     "output": "whatsapp-notes-staging.html",
     "quality_profile": "standard"
   },
@@ -99,6 +99,13 @@
       "col": 7,
       "type": "frontend",
       "label": "Ricerca italiana in sola lettura / socket UNIX privato e tunnel SSH"
+    },
+    {
+      "id": "collections",
+      "lane": "operator",
+      "col": 7,
+      "type": "service",
+      "label": "Prima raccolta SOLO Note / indizi locali note-v1 / suggerimenti da confermare"
     }
   ],
   "edges": [
@@ -158,6 +165,21 @@
       "label": "query parametrizzate / nessun invio"
     },
     {
+      "from": "archive",
+      "to": "collections",
+      "label": "SQL solo Note + validazione / connessione read-only / massimo 10000 record"
+    },
+    {
+      "from": "collections",
+      "to": "viewer",
+      "label": "categorie, filtri, pagine e originale / nessuna attività creata"
+    },
+    {
+      "from": "collections",
+      "to": "codex",
+      "label": "CLI SSH / testo solo con --read esplicito / nessun MCP pubblico"
+    },
+    {
       "from": "viewer",
       "to": "coverage",
       "label": "errori e lacune richiedono revisione operatore"
@@ -169,7 +191,7 @@
     }
   ],
   "contracts": {
-    "status": "Taccuino operativo: 1628 record, di cui 1625 da export. Ricerca e idempotenza verificate; acquisizione CRM manuale e copertura WhatsApp non verificata.",
+    "status": "Taccuino operativo: 1628 record, di cui 1625 da export. Prima raccolta Note (1058 record) con indizi locali, originale e paginazione verificata nel browser. Acquisizione CRM manuale e copertura WhatsApp non verificata.",
     "pending": [
       "confronto copertura export con il telefono",
       "recupero media omessi",

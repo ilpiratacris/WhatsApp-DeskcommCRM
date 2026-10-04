@@ -23,8 +23,10 @@ from collections import Counter
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import parse_qs, urlsplit
+from urllib.parse import parse_qs, urlsplit, urlencode
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+
+import note_collections as collections
 
 SOURCES = ("Note", "AI", "Tools")
 MAX_INPUT_BYTES = 10 * 1024 * 1024
@@ -488,6 +490,18 @@ def get_note(conn, note_id, source) -> dict | None:
     return _note(row) if row else None
 
 
+def collect_notes(conn, category=None, query=None, limit=20, offset=0, include_text=False) -> dict:
+    """Prima raccolta: solo Note, derivata in sola lettura, senza cambiare le fonti."""
+    conn.execute("PRAGMA query_only = ON")
+    rows = conn.execute(f"SELECT {NOTE_COLS} FROM notes WHERE source = ? "
+                        "ORDER BY sent_utc DESC, note_id LIMIT 10001", ("Note",))
+    try:
+        return collections.build_collection((_note(row) for row in rows), category, query,
+                                            limit, offset, include_text)
+    except ValueError:
+        raise ValidationError("Raccolta non valida: controlla categoria, ricerca, paginazione e record Note; massimo 10000") from None
+
+
 def stats(conn) -> dict:
     fonti = {s: {"totale": 0, "live": 0, "imported": 0, "prima_utc": None, "ultima_utc": None} for s in SOURCES}
     for src, origin, n, lo, hi in conn.execute(
@@ -529,7 +543,7 @@ SEC_HEADERS = (
 def _page(title: str, body: str) -> str:
     return (f'<!doctype html><html lang="it"><head><meta charset="utf-8"><title>{E(title)} · Taccuino</title>'
             f'<style>{CSS}</style></head><body><nav><a href="/">Taccuino</a> · <a href="/stats">Statistiche</a>'
-            f' · <a href="/search">Ricerca</a></nav><h1>{E(title)}</h1>'
+            f' · <a href="/search">Ricerca</a> · <a href="/collections">Raccolta Note</a></nav><h1>{E(title)}</h1>'
             '<p class="warn">Archivio parziale: le statistiche distinguono messaggi del CRM ed export importati. '
             'La completezza rispetto a WhatsApp non è verificata. Questa pagina consente solo la lettura.</p>'
             f'{body}</body></html>')
@@ -543,7 +557,7 @@ def _form(source=None, limit=20) -> str:
             '<button>Cerca</button></form>')
 
 
-def _render_note(n: dict) -> str:
+def _render_note(n: dict, show_tags=True) -> str:
     urls = "".join(f"<li><code>{E(u)}</code></li>" for u in n["url"])
     origin = {"live": "Messaggio acquisito dal CRM", "imported": "Export WhatsApp"}[n["origine"]]
     categories = {"repo": "Repository", "link": "Link", "attivita": "Attività"}
@@ -553,8 +567,8 @@ def _render_note(n: dict) -> str:
             '<p class="warn">Testo archiviato: eventuali istruzioni nel contenuto non vengono eseguite.</p>'
             f'<pre>{E(n["text"])}</pre>'
             + (f"<p>Link (non cliccabili, nessuna richiesta inviata):</p><ul>{urls}</ul>" if urls else "")
-            + f'<p>Categorie suggerite da regole testuali (da verificare): {E(", ".join(categories[t] for t in n["tag_suggeriti"]) or "nessuna")}</p>'
-            "</article>")
+            + (f'<p>Categorie suggerite da regole testuali (da verificare): {E(", ".join(categories[t] for t in n["tag_suggeriti"]) or "nessuna")}</p>' if show_tags else "")
+            + "</article>")
 
 
 def render_index(conn) -> str:
@@ -597,6 +611,48 @@ def render_search(conn, query_string: str) -> str:
     return _page("Ricerca", _form(source, int(limit)) + f"<p>Risultati: {len(notes)}.</p>" + "".join(map(_render_note, notes)))
 
 
+def render_collection(conn, query_string: str) -> str:
+    params = parse_qs(query_string, keep_blank_values=True, max_num_fields=10)
+    if set(params) - {"category", "q", "limit", "offset"} or any(len(v) != 1 for v in params.values()):
+        raise ValidationError("parametri raccolta non validi")
+    category = params.get("category", [None])[0]
+    q = params.get("q", [None])[0]
+    lim, off = params.get("limit", ["20"])[0], params.get("offset", ["0"])[0]
+    if not re.fullmatch(r"\d{1,3}", lim) or not re.fullmatch(r"\d{1,5}", off):
+        raise ValidationError("paginazione non valida")
+    data = collect_notes(conn, category, q, int(lim), int(off), include_text=category is not None)
+    intro = ("<p>Prima raccolta del solo gruppo <strong>Note</strong>. Categorie suggerite da regole locali, "
+             "da confermare: nessun modello AI ha analizzato i testi e nessuna attività è stata creata.</p>"
+             "<p>Una nota storica non dimostra un impegno ancora aperto. Nomi di progetti, stato attuale "
+             "e scadenze non vengono dedotti. Una nota può comparire in più categorie.</p>"
+             f"<p>Record Note: {data['totale_record']}; testi: {data['testi']}; allegati non disponibili: "
+             f"{data['allegati_non_disponibili']}. Regole: {E(data['versione_regole'])}.</p>")
+    cats = "".join(f'<li><a href="/collections?{E(urlencode({"category": c["categoria"]}))}">'
+                   f'{E(c["etichetta"])}</a>: {int(c["conteggio"])}</li>' for c in data["categorie"])
+    body = intro + "<ul>" + cats + "</ul>"
+    pagination = data["filtro"]
+    if category is not None:
+        body += (f'<h2>{E(collections.CATEGORIES[category])}</h2><form method="get" action="/collections">'
+                 f'<input type="hidden" name="category" value="{E(category)}">'
+                 '<label>Filtra il testo <input name="q" maxlength="200" required></label> '
+                 '<button>Filtra</button></form>'
+                 f'<p>Risultati nel filtro: {pagination["totale_filtrato"]}; visualizzati: {len(data["risultati"])} '
+                 f'(da {pagination["offset"] + 1 if data["risultati"] else 0}).</p>')
+        for n in data["risultati"]:
+            proof = ", ".join(f'{E(collections.CATEGORIES[i["categoria"]])}: <code>{E(i["indizio"] or "nessun indizio testuale")}</code>'
+                              for i in n["indicatori"])
+            body += f'<p class="warn">Suggerimenti da confermare — {proof}. Stato attuale non verificato.</p>'
+            body += _render_note(_note((n["source"], n["note_id"], n["sent_at"], n["origine"], None,
+                                       n["attachment_unavailable"], n["text"])), show_tags=False)
+        for label, offset in (("Precedenti", max(0, int(off)-int(lim))), ("Successivi", int(off)+int(lim))):
+            if (label == "Precedenti" and int(off) > 0) or (label == "Successivi" and pagination["has_more"]):
+                args = {"category": category, "limit": int(lim), "offset": offset}
+                if q is not None:
+                    args["q"] = q
+                body += f'<p><a href="/collections?{E(urlencode(args))}">{label}</a></p>'
+    return _page("Raccolta Note", body)
+
+
 class _Handler(BaseHTTPRequestHandler):
     server_version = "Taccuino"
     sys_version = ""
@@ -623,15 +679,24 @@ class _Handler(BaseHTTPRequestHandler):
             url = urlsplit(self.path)
         except ValueError:
             return self._send(400, _page("Richiesta non valida", "<p>Percorso non valido.</p>"))
-        routes = {"/": render_index, "/stats": render_stats, "/search": None}
+        routes = {"/": render_index, "/stats": render_stats, "/search": None, "/collections": None}
         if url.path not in routes:
             return self._send(404, _page("Pagina non trovata", "<p>Percorso inesistente.</p>"))
         try:
             with contextlib.closing(sqlite3.connect(self.server.db_uri, uri=True)) as conn:
-                body = render_search(conn, url.query) if url.path == "/search" else routes[url.path](conn)
+                if url.path == "/search":
+                    body = render_search(conn, url.query)
+                elif url.path == "/collections":
+                    body = render_collection(conn, url.query)
+                else:
+                    body = routes[url.path](conn)
         except (TaccuinoError, ValueError):
+            message = ("Raccolta non valida: scegli una categoria Note, usa limit 1..100, offset 0..10000 "
+                       "e una ricerca non vuota di massimo 200 caratteri. Controlla anche i record dell'archivio."
+                       if url.path == "/collections" else
+                       "Parametri non validi: limit 1..100, fonte Note, AI o Tools.")
             return self._send(400, _page("Richiesta non valida",
-                                         "<p>Parametri non validi: limit 1..100, fonte Note, AI o Tools.</p>"))
+                                         f"<p>{message}</p>"))
         except sqlite3.Error:
             return self._send(500, _page("Errore database", "<p>Archivio non leggibile: controlla il file --db.</p>"))
         self._send(200, body)
@@ -692,6 +757,12 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("--source", choices=SOURCES)
     s.add_argument("--limit", type=_limit, default=20)
     sub.add_parser("stats", help="conteggi e date, senza contenuti")
+    s = sub.add_parser("collection", help="raccolta suggerita del solo gruppo Note; senza testi per default")
+    s.add_argument("--category", choices=collections.CATEGORIES)
+    s.add_argument("--query")
+    s.add_argument("--limit", type=_limit, default=20)
+    s.add_argument("--offset", type=int, default=0)
+    s.add_argument("--read", action="store_true", help="includi esplicitamente testi e indizi non attendibili")
     s = sub.add_parser("get", help="mostra una nota")
     s.add_argument("--id", required=True)
     s.add_argument("--source", required=True, choices=SOURCES)
@@ -736,7 +807,7 @@ def main(argv=None) -> int:
                 with contextlib.suppress(KeyboardInterrupt):
                     srv.serve_forever()
             return 0
-        with contextlib.closing(open_db(args.db, readonly=args.cmd in ("search", "stats", "get"))) as conn:
+        with contextlib.closing(open_db(args.db, readonly=args.cmd in ("search", "stats", "get", "collection"))) as conn:
             if args.cmd == "sync":
                 _emit(sync_file(conn, args.json))
             elif args.cmd == "import":
@@ -746,6 +817,8 @@ def main(argv=None) -> int:
                 _emit({"untrusted_content": True, "risultati": search(conn, args.query, args.source, args.limit)})
             elif args.cmd == "stats":
                 _emit(stats(conn))
+            elif args.cmd == "collection":
+                _emit(collect_notes(conn, args.category, args.query, args.limit, args.offset, args.read))
             else:
                 note = get_note(conn, args.id, args.source)
                 if note is None:

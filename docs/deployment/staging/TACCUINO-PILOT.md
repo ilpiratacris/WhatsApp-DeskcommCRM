@@ -182,10 +182,90 @@ Il prossimo test utile è confrontare conteggi e intervalli con il titolare e
 recuperare una sua nota di progetto dall'archivio storico già importato.
 Le altre chat restano escluse. Nessun messaggio è stato inviato durante questo pilota.
 
+## Prima raccolta Note — 04/10/2026
+
+Disponibile nella vista privata `/collections`, tramite lo stesso socket UNIX e
+tunnel SSH già autorizzati. La raccolta iniziale contiene **solo Note**: AI e Tools
+restano consultabili nella ricerca generale. La navigazione permette di aprire
+una categoria, leggere la nota originale con fonte/data/ID, filtrare il testo e
+passare alla pagina successiva o precedente. Nessun testo privato è incluso nel
+report o nella [prova browser](evidence/taccuino-collection-2026-10-04.jpg).
+
+| Categoria suggerita      | Record |
+| ------------------------ | -----: |
+| Riferimenti a progetti   |      3 |
+| Possibili attività       |     13 |
+| Repository               |     17 |
+| Risorse AI               |      7 |
+| Link                     |    546 |
+| Altre note               |    235 |
+| Allegati non disponibili |    267 |
+
+Totale Note: **1058 record**, di cui **791 testi** e **267 riferimenti a media**.
+556 testi hanno almeno un indizio; 235 non hanno indizi. 29 record compaiono in più
+categorie: le righe della tabella **non si sommano** al totale. I conteggi derivano
+dal database reale tramite codice in sola lettura, non da stime o interpretazioni.
+
+Le regole locali `note-v1` mostrano un indizio letterale per ogni categoria; nessun
+modello AI ha analizzato i contenuti. Non è un censimento di progetti, né un elenco
+di attività ancora aperte: una nota storica può essere superata. Nomi, scadenze e
+stato attuale non sono dedotti. Non esistono conferme persistenti o promemoria.
+Gli URL non vengono visitati e i media omessi restano non disponibili.
+
+### Prove completate
+
+- **Preparazione:** modulo puro `note_collections.py`, CLI `collection` e nuova
+  pagina italiana. Default CLI senza testi/indizi; `--read` è una lettura esplicita.
+  Doppio controllo Note, query letterali, cap 10000 record e pagine di massimo 100.
+- **Test:** 76 test su Linux superati; Windows 76 con 5 prove POSIX non applicabili.
+  Prove indipendenti di isolamento, originali, HTML escaping, HTTP Host/CSP/no-store,
+  paginazione e file invariato. Mutazione intenzionale del filtro SQL Note → AI in
+  una copia temporanea: il test diventa rosso; il codice attivo non è stato mutato.
+- **Claude:** piano e revisione indipendente Fable 5.1 in sola lettura; delega
+  circoscritta a modulo/test con Opus 5.5, effort high. Solo codice e dati sintetici.
+  Corrette due osservazioni della revisione: URL ambigui con backslash/credenziali
+  non diventano repository, e la raccolta non mostra vecchie etichette concorrenti.
+  Gli indizi HTML usano `code` con isolamento bidirezionale.
+- **Deploy:** copiati soltanto i due moduli dell'utilità e riavviato
+  `deskcomm-taccuino.service`. Nessuna migrazione, modifica Docker/Traefik/Supabase,
+  nuovo ingresso pubblico o modifica del runtime CRM. SHA-256 SQLite identico
+  prima e dopo deploy/consultazione. Permessi e isolamento del servizio invariati.
+- **Browser reale:** indice coerente con CLI; categoria progetti con 3 originali;
+  filtro letterale `progetto` con 1 risultato; categoria link con 546 record,
+  prima pagina 20 da 1 e seconda pagina 20 da 21. Nessun errore console rilevato.
+  Screenshot pubblico limitato all'indice senza contenuti o identificativi.
+- **CRM:** HTTPS `/login` restituisce 200 dopo il deploy dell'utilità. Non è stata
+  ripetuta una sessione autenticata completa del CRM: questa modifica è separata.
+- **Governance:** aggiornati README, report, grafo e frammento Novità. Nessuna voce
+  nuova nel pannello Gestione funzioni: l'utilità è privata, fuori dal runtime CRM.
+- **Controlli repository:** typecheck e `release:conferir` superati; il comando
+  release ha solo verificato i frammenti, senza creare una release. Grafo Graft
+  rigenerato/verificato e mappa architetturale controllata per ID, lane, archi e
+  assenza di nodi isolati. `pnpm lint` resta rosso per 3 errori preesistenti nel
+  helper locale ignorato `.runtime/check-agenda-date.cjs`, oltre agli avvisi già
+  presenti; quel file non è parte del codice consegnato né è stato modificato.
+  ESLint escludendo solo `.runtime/**`: zero errori, 489 avvisi preesistenti.
+
+### Come consultarla e cosa manca
+
+L'operatore con SSH apre il tunnel descritto nel runbook del pilota e visita
+`http://127.0.0.1:18871/collections`. **Non è una pagina pubblica nel CRM e non è
+accessibile direttamente dallo smartphone**. Il comando `collection` rende già
+recuperabili i riferimenti a Codex tramite SSH; questo non costituisce un
+connettore ChatGPT. Per esempi e output privato esplicito vedere il README del modulo.
+
+Il passo successivo è confermare con il titolare alcune categorie e il significato
+delle note prima di costruire progetti strutturati, attività o memoria semantica.
+Successivamente si potrà estendere la raccolta ad AI e Tools e progettare accesso
+ChatGPT limitato a queste fonti. Restano aperti copertura sul telefono, recupero
+allegati e aggiornamento automatico. Hindsight e importazioni wiki restano in pausa.
+
 ## Provenienza
 
 Audit server in sola lettura, report [WHATSAPP-NOTES.md](WHATSAPP-NOTES.md),
 documentazione ufficiale NOWEB e punto di ripresa locale Hindsight.
 AI-Wiki: `wiki/sources/cristiano-costa-master-profile-llm-wiki.md` per la
 distinzione fra fatti e ipotesi operative; consultati AGENTS.md, index.md e log.md.
+Consultata anche `wiki/analyses/morning-briefing-shared-memory-2026-09-24.md`:
+memoria curata e integrazione ChatGPT locale ancora da verificare. Wiki solo letta.
 Nomi di lavoro e architettura futura sono proposte, non integrazioni esistenti.

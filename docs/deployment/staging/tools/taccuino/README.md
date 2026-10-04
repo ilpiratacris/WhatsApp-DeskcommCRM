@@ -1,6 +1,6 @@
 # Taccuino (pilota)
 
-Archivio locale di note in un solo file Python (`notes_archive.py`). Usa solo la libreria standard (Python ≥ 3.11).
+Archivio locale di note con CLI e visualizzatore (`notes_archive.py`) e raccolte (`note_collections.py`). Usa solo la libreria standard (Python ≥ 3.11).
 È un modulo **standalone**: è isolato dal CRM, non usa tabelle Supabase, non ha dipendenze e non fa richieste di rete in uscita.
 
 Il codice è pubblico. Il database SQLite e gli export restano **privati e fuori da Git**.
@@ -37,6 +37,13 @@ python notes_archive.py --db "$DB" search --query "fattura" --source Note --limi
 # Statistiche senza testi: fonti, date, live/importate, ricevute recenti, limite finestra
 python notes_archive.py --db "$DB" stats
 
+# Indice della prima raccolta: SOLO Note, conteggi senza testi
+python notes_archive.py --db "$DB" collection
+
+# Riferimenti senza testi; --read aggiunge testo originale e indizi (output privato)
+python notes_archive.py --db "$DB" collection --category progetti
+python notes_archive.py --db "$DB" collection --category attivita --query "da provare" --limit 20 --offset 0 --read
+
 # Singola nota
 python notes_archive.py --db "$DB" get --id 3f2b...-... --source AI
 
@@ -52,6 +59,25 @@ python notes_archive.py --db "$DB" serve --port 18871
 ```
 
 Codici di uscita: `0` ok; `1` nota non trovata, oppure anteprima con errori; `2` input, sicurezza o validazione rifiutati; `3` errore database (messaggio mascherato).
+
+### Prima raccolta Note
+
+La pagina `/collections` mostra un indice italiano e permette di aprire le categorie,
+filtrare il testo e scorrere risultati con date, provenienza e originale. Regole locali
+`note-v1`: riferimenti a progetti, possibili attività, repository, risorse AI, link,
+altre note e allegati non disponibili. Una nota può comparire in più categorie.
+La categoria deriva da un indizio letterale mostrato insieme alla nota: **non è una
+valutazione semantica AI**, né un elenco di impegni ancora aperti. Nessun nome di
+progetto, scadenza o stato viene dedotto. Gli allegati non vengono analizzati.
+
+Solo il gruppo esatto `Note` entra nella raccolta, con doppio controllo SQL/modulo.
+AI e Tools restano nell'archivio e nella ricerca, senza classificazione in questa fase.
+Nessuna scrittura SQLite: connessione in sola lettura e `PRAGMA query_only`.
+Massimo 10000 record (oltre il limite l'intera raccolta viene rifiutata), 100 risultati
+per pagina, query letterale di massimo 200 caratteri. Il comando senza `--read` non
+emette testi né indizi. La pagina di categoria è una lettura esplicita dei testi,
+accessibile solamente dalla vista privata; query e contenuti non vengono loggati.
+Non esistono ancora conferme persistenti, promemoria o connettore pubblico ChatGPT.
 
 ## Envelope di sync
 
