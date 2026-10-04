@@ -314,4 +314,7 @@ architetturale; nessuna nuova funzione da inserire nel pannello amministrativo.
 
 La qualità editoriale completa resta aperta per i moduli specialistici e le frasi fuori dall'elenco; copertura delle chiavi e passaggio dei test non la certificano. Gli invii WhatsApp, le conversioni pubblicitarie e il comportamento dei provider non configurati non sono stati provati live. Il problema preesistente del workflow `release` del fork (`RELEASE_APP_ID` assente), descritto sopra, resta separato da questo workflow staging superato.
 
-Integrazione e push ordinario su `main`: da registrare dopo il confronto remoto.
+Integrato su `main` tramite fast-forward e push ordinario. Confronto remoto
+eseguito sul commit `a4542ecb2d5d5b5da494f977a3ffee73ed038ff0`: `git ls-remote`
+coincidente con HEAD, albero pulito. L’aggiornamento conclusivo di questo report
+non modifica il codice dell’immagine già verificata.
