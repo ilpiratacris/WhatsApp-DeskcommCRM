@@ -22,6 +22,7 @@ versionati. Ciclo operativo e ritorno in caso di errore: [runbook Graft](../runb
 
 | arquivo | escopo |
 |---|---|
+| `whatsapp-notes-staging.architecture.json` | tre gruppi approvati → filtro CRM → lettore SSH privato; storico, archivio e connettore dichiarati ancora aperti |
 | `conversoes-de-anuncios.architecture.json` | venda, entrega, protocolo assíncrono, pendências e reprocessamento |
 | `prospeccao-nativa.architecture.json` | busca comercial, fila gradual, configuração conversacional persistente, sandbox e assistente de voz opcional |
 | `pre-go-live-whatsapp.architecture.json` | modo de teste por canal (issue #573): configuração administrativa, gate compartilhado, releitura no envio e validação pelo Inbox |

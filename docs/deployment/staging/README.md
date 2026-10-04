@@ -82,3 +82,7 @@ ripristino completo isolato del database e copia cifrata iniziale fuori server
 verificati nel report WhatsApp. Replica periodica fuori server, SMTP e capacità
 sotto carico restano da configurare/verificare. Ultimo disco libero circa 16 GiB: valutare crescita
 prima di abilitare media/carichi. Nessun agente di aggiornamento automatico.
+
+Gruppi personali selezionati e accesso alle note:
+[WHATSAPP-NOTES.md](WHATSAPP-NOTES.md), con attivazione verificata, lettore SSH
+circoscritto e limiti espliciti sullo storico e sul collegamento ChatGPT.
